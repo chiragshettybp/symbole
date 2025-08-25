@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SuisseIntl Font Face */
+@font-face {
+  font-family: 'SuisseIntl';
+  src: url('/fonts/SuisseIntl-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SuisseIntl';
+  src: url('/fonts/SuisseIntl-Regular.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Dark theme base colors */
+    --background: 0 0% 3%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Primary silver accent system */
+    --primary: 0 0% 90%;
+    --primary-foreground: 0 0% 10%;
+    --primary-hover: 0 0% 85%;
+    --primary-glow: 0 0% 95%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 63%;
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 90%;
+
+    --radius: 0.75rem;
+    
+    /* E-commerce specific colors */
+    --price-background: 0 0% 90%;
+    --price-foreground: 0 0% 10%;
+    --success: 142 76% 36%;
+    --warning: 48 96% 53%;
+    
+    /* Chart colors for revenue dashboard */
+    --chart-1: 142 76% 36%;
+    --chart-2: 199 89% 48%;
+    --chart-3: 48 96% 53%;
+    --chart-4: 0 63% 31%;
+    --chart-5: 262 83% 58%;
+    
+    /* Revenue dashboard specific colors */
+    --revenue-primary: 142 76% 36%;
+    --revenue-secondary: 199 89% 48%;
+    --delivered-color: 142 76% 36%;
+    --cancelled-color: 0 63% 31%;
+    --pending-color: 48 96% 53%;
+    --info-color: 199 89% 48%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(0 0% 90%), hsl(0 0% 95%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 6%), hsl(0 0% 8%));
+    
+    /* Shadows */
+    --shadow-card: 0 4px 12px hsl(0 0% 0% / 0.15);
+    --shadow-primary: 0 4px 20px hsl(0 0% 90% / 0.3);
+    --shadow-hover: 0 8px 25px hsl(0 0% 0% / 0.25);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s ease-out;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'SuisseIntl', 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    margin: 0;
+    height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Heading styles - 700 weight */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+    font-weight: 700;
+  }
+
+  /* Regular text - 400 weight */
+  p, span, div, label {
+    font-weight: 400;
+  }
+
+  html {
+    margin: 0;
+    height: 100%;
+  }
+}
+
+@layer components {
+  /* Price pill component */
+  .price-pill {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold;
+    background: hsl(var(--price-background));
+    color: hsl(var(--price-foreground));
+  }
+  
+  /* Product card hover effects */
+  .product-card {
+    @apply bg-card border border-border rounded-lg overflow-hidden;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+  
+  .product-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  
+  /* Button variants for e-commerce */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold;
+    background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--shadow-primary);
+    transition: var(--transition-fast);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 25px hsl(0 0% 90% / 0.4);
+  }
+
+  /* Revenue dashboard components */
+  .revenue-card {
+    @apply bg-card border border-border rounded-lg p-6;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+  }
+
+  .revenue-card:hover {
+    box-shadow: var(--shadow-hover);
+  }
+
+  .stat-card-delivered {
+    @apply text-green-600;
+    color: hsl(var(--delivered-color));
+  }
+
+  .stat-card-cancelled {
+    @apply text-red-600;
+    color: hsl(var(--cancelled-color));
+  }
+
+  .stat-card-pending {
+    @apply text-orange-600;
+    color: hsl(var(--pending-color));
+  }
+
+  /* Chart customizations */
+  .recharts-cartesian-grid-horizontal line,
+  .recharts-cartesian-grid-vertical line {
+    stroke: hsl(var(--border));
+    opacity: 0.5;
+  }
+
+  .recharts-tooltip-wrapper {
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
+  }
+}
