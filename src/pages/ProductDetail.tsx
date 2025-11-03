@@ -318,7 +318,7 @@ const ProductDetail = () => {
                           "/api/placeholder/300/300"
                         }
                         alt={relatedProduct.name}
-                        className="object-cover w-full h-full"
+                        className="object-contain w-full h-full"
                       />
                     </div>
                     <div className="p-4 space-y-2">
