@@ -577,18 +577,9 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      current_user_is_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-      generate_order_number: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
-      is_admin: {
-        Args: { user_id?: string }
-        Returns: boolean
-      }
+      current_user_is_admin: { Args: never; Returns: boolean }
+      generate_order_number: { Args: never; Returns: string }
+      is_admin: { Args: { user_id?: string }; Returns: boolean }
     }
     Enums: {
       app_role: "admin" | "user"
