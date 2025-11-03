@@ -22,6 +22,12 @@ import AdminCustomers from "./pages/AdminCustomers";
 import AdminSettings from "./pages/AdminSettings";
 import AdminAudit from "./pages/AdminAudit";
 import NotFound from "./pages/NotFound";
+import NewArrivals from "./pages/NewArrivals";
+import Sale from "./pages/Sale";
+import Shipping from "./pages/Shipping";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import FAQPage from "./pages/FAQPage";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +51,12 @@ const App = () => (
               <Route path="/order-success" element={<OrderSuccess />} />
               <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
               <Route path="/track-order" element={<TrackOrder />} />
+              <Route path="/new-arrivals" element={<NewArrivals />} />
+              <Route path="/sale" element={<Sale />} />
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
               
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
