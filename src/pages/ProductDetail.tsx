@@ -27,6 +27,7 @@ const ProductDetail = () => {
         .from('products')
         .select('*')
         .eq('slug', slug)
+        .neq('visible', false)
         .single();
       
       if (error) throw error;
@@ -44,6 +45,7 @@ const ProductDetail = () => {
         .select('*')
         .eq('category', product.category)
         .neq('id', product.id)
+        .neq('visible', false)
         .limit(4);
       
       if (error) throw error;

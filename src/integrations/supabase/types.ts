@@ -337,6 +337,7 @@ export type Database = {
           stock_count: number
           thumbnail_image: string | null
           updated_at: string
+          visible: boolean
         }
         Insert: {
           brand?: string | null
@@ -355,6 +356,7 @@ export type Database = {
           stock_count?: number
           thumbnail_image?: string | null
           updated_at?: string
+          visible?: boolean
         }
         Update: {
           brand?: string | null
@@ -373,6 +375,7 @@ export type Database = {
           stock_count?: number
           thumbnail_image?: string | null
           updated_at?: string
+          visible?: boolean
         }
         Relationships: []
       }

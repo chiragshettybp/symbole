@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { supabase } from '@/integrations/supabase/client';
-import { Package, Search, Plus, Edit, Trash2, Download, RefreshCw, Eye, EyeOff, Link } from 'lucide-react';
+import { Package, Search, Plus, Edit, Trash2, Download, RefreshCw, Eye, EyeOff, Link, Copy } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAdmin } from '@/contexts/AdminContext';
 import { useToast } from '@/hooks/use-toast';
@@ -30,6 +30,7 @@ interface Product {
   colors: string[];
   stock_count: number;
   featured?: boolean;
+  visible?: boolean;
   created_at: string;
   updated_at: string;
   thumbnail_image?: string;
@@ -257,6 +258,95 @@ const AdminProducts = () => {
       toast({
         title: "Error", 
         description: "Failed to update product",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const toggleVisibility = async (product: Product) => {
+    try {
+      const { error } = await supabase
+        .from('products')
+        .update({ visible: !product.visible })
+        .eq('id', product.id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: `Product ${product.visible ? 'hidden' : 'made visible'}`,
+      });
+
+      logActivity('update', product.id, 'product', 
+        `${product.visible ? 'Hidden' : 'Shown'} product: ${product.name}`);
+    } catch (error) {
+      console.error('Error updating product visibility:', error);
+      toast({
+        title: "Error", 
+        description: "Failed to update product visibility",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const cloneProduct = async (product: Product) => {
+    try {
+      // Generate unique slug for cloned product
+      const baseSlug = `${product.slug}-copy`;
+      let finalSlug = baseSlug;
+      let counter = 1;
+      
+      while (true) {
+        const { data: existingProduct } = await supabase
+          .from('products')
+          .select('id')
+          .eq('slug', finalSlug)
+          .maybeSingle();
+        
+        if (!existingProduct) break;
+        finalSlug = `${baseSlug}-${counter}`;
+        counter++;
+      }
+
+      const clonedProduct = {
+        name: `${product.name} (Copy)`,
+        slug: finalSlug,
+        description: product.description,
+        price: product.price,
+        original_price: product.original_price,
+        category: product.category,
+        brand: product.brand,
+        sizes: product.sizes,
+        colors: product.colors,
+        stock_count: product.stock_count,
+        images: product.images,
+        thumbnail_image: product.thumbnail_image,
+        featured: false,
+        visible: false, // Cloned products are hidden by default
+      };
+
+      const { data: insertedProduct, error } = await supabase
+        .from('products')
+        .insert([clonedProduct])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      // Open the cloned product in edit mode
+      setEditingProduct(insertedProduct);
+
+      toast({
+        title: "Success",
+        description: "Product cloned successfully. Edit and publish when ready.",
+      });
+
+      logActivity('create', insertedProduct.id, 'product', `Cloned product from: ${product.name}`);
+    } catch (error) {
+      console.error('Error cloning product:', error);
+      toast({
+        title: "Error",
+        description: "Failed to clone product",
         variant: "destructive",
       });
     }
@@ -638,22 +728,29 @@ const AdminProducts = () => {
                       <Badge variant={product.stock_count > 0 ? "default" : "destructive"} className="text-xs">
                         {product.stock_count} in stock
                       </Badge>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => toggleFeatured(product)}
-                        className="h-8 w-8 p-0"
-                      >
-                        {product.featured ? (
-                          <Eye className="h-3 w-3 text-primary" />
-                        ) : (
-                          <EyeOff className="h-3 w-3 text-muted-foreground" />
-                        )}
-                      </Button>
+                      {product.featured && (
+                        <Badge variant="default" className="text-xs">Featured</Badge>
+                      )}
+                      {product.visible === false && (
+                        <Badge variant="outline" className="text-xs">Hidden</Badge>
+                      )}
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2 pt-2 border-t">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => toggleVisibility(product)}
+                      className="h-8 px-2"
+                      title={product.visible !== false ? "Hide" : "Show"}
+                    >
+                      {product.visible !== false ? (
+                        <Eye className="h-3 w-3 text-success" />
+                      ) : (
+                        <EyeOff className="h-3 w-3 text-muted-foreground" />
+                      )}
+                    </Button>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -662,6 +759,15 @@ const AdminProducts = () => {
                     >
                       <Eye className="h-3 w-3 mr-1" />
                       View
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => cloneProduct(product)}
+                      className="h-8 px-2 flex-1"
+                    >
+                      <Copy className="h-3 w-3 mr-1" />
+                      Clone
                     </Button>
                     <Button
                       variant="ghost"
@@ -698,6 +804,7 @@ const AdminProducts = () => {
                     <TableHead>Price</TableHead>
                     <TableHead>Stock</TableHead>
                     <TableHead>Featured</TableHead>
+                    <TableHead>Visible</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -749,9 +856,25 @@ const AdminProducts = () => {
                           variant="ghost"
                           size="sm"
                           onClick={() => toggleFeatured(product)}
+                          title={product.featured ? "Remove from featured" : "Add to featured"}
                         >
                           {product.featured ? (
-                            <Eye className="h-4 w-4 text-primary" />
+                            <Badge variant="default" className="text-xs">Featured</Badge>
+                          ) : (
+                            <Badge variant="outline" className="text-xs">Not Featured</Badge>
+                          )}
+                        </Button>
+                      </TableCell>
+
+                      <TableCell>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => toggleVisibility(product)}
+                          title={product.visible ? "Hide product" : "Show product"}
+                        >
+                          {product.visible !== false ? (
+                            <Eye className="h-4 w-4 text-success" />
                           ) : (
                             <EyeOff className="h-4 w-4 text-muted-foreground" />
                           )}
@@ -764,13 +887,23 @@ const AdminProducts = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => navigate(`/product/${product.slug}`)}
+                            title="View product"
                           >
                             <Eye className="h-4 w-4" />
                           </Button>
                           <Button
                             variant="ghost"
                             size="sm"
+                            onClick={() => cloneProduct(product)}
+                            title="Clone product"
+                          >
+                            <Copy className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
                             onClick={() => setEditingProduct(product)}
+                            title="Edit product"
                           >
                             <Edit className="h-4 w-4" />
                           </Button>
@@ -778,6 +911,7 @@ const AdminProducts = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => deleteProduct(product)}
+                            title="Delete product"
                           >
                             <Trash2 className="h-4 w-4 text-destructive" />
                           </Button>

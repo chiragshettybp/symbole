@@ -21,6 +21,7 @@ const TrendingSneakers = () => {
       const { data, error } = await supabase
         .from('products')
         .select('*')
+        .neq('visible', false)
         .order('created_at', { ascending: false });
       
       if (error) throw error;
