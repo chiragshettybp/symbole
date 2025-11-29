@@ -19,6 +19,8 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showSizeChart, setShowSizeChart] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
 
   const { data: product, isLoading } = useQuery({
     queryKey: ['product', slug],
@@ -82,6 +84,21 @@ const ProductDetail = () => {
     }
   };
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setZoomPosition({ x, y });
+  };
+
+  const handleMouseEnter = () => {
+    setIsZoomed(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsZoomed(false);
+  };
+
   if (isLoading) {
     return (
       <Layout>
@@ -120,7 +137,12 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Image Gallery */}
           <div className="space-y-4">
-            <div className="relative overflow-hidden rounded-2xl aspect-square">
+            <div 
+              className="relative overflow-hidden rounded-2xl aspect-square cursor-zoom-in"
+              onMouseMove={handleMouseMove}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
               <img
                 src={
                   product.images && product.images.length > 0
@@ -128,7 +150,16 @@ const ProductDetail = () => {
                     : product.thumbnail_image || "/api/placeholder/600/600"
                 }
                 alt={product.name}
-                className="w-full h-full object-cover"
+                className={`w-full h-full object-cover transition-transform duration-200 ${
+                  isZoomed ? 'scale-150' : 'scale-100'
+                }`}
+                style={
+                  isZoomed
+                    ? {
+                        transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`,
+                      }
+                    : undefined
+                }
                 loading="lazy"
               />
               
