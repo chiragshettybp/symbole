@@ -120,7 +120,7 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Image Gallery */}
           <div className="space-y-4">
-            <div className="relative overflow-hidden rounded-2xl">
+            <div className="relative overflow-hidden rounded-2xl aspect-square">
               <img
                 src={
                   product.images && product.images.length > 0
@@ -128,7 +128,7 @@ const ProductDetail = () => {
                     : product.thumbnail_image || "/api/placeholder/600/600"
                 }
                 alt={product.name}
-                className="w-full h-auto object-contain block"
+                className="w-full h-full object-cover"
                 loading="lazy"
               />
               
@@ -312,7 +312,7 @@ const ProductDetail = () => {
               {relatedProducts.map((relatedProduct) => (
                 <div key={relatedProduct.id} className="product-card">
                   <a href={`/product/${relatedProduct.slug}`} className="block">
-                    <div className="aspect-square relative overflow-hidden bg-white rounded-t-lg p-4">
+                    <div className="aspect-square relative overflow-hidden rounded-t-lg">
                       <img
                         src={
                           relatedProduct.thumbnail_image ||
