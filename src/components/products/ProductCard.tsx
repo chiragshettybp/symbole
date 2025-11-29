@@ -28,7 +28,7 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
   return (
     <div className="product-card group">
       <Link to={`/product/${product.slug}`} className="block">
-        <div className="relative overflow-hidden rounded-t-lg">
+        <div className="relative overflow-hidden rounded-t-lg aspect-square">
           <img
             src={
               product.thumbnail_image || 
@@ -36,7 +36,7 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
               "/api/placeholder/400/400"
             }
             alt={product.name}
-            className="w-full h-auto object-contain block"
+            className="w-full h-full object-cover"
             loading="lazy"
           />
           {discount > 0 && (
