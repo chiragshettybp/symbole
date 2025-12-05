@@ -1,4 +1,4 @@
-import { Search, ShoppingCart, Menu } from "lucide-react";
+import { Search, ShoppingCart, Menu, Sun, Moon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -6,13 +6,13 @@ import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import CartSidebar from "@/components/cart/CartSidebar";
 import logo from "@/assets/logo.png";
+import { useTheme } from "next-themes";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {
-    cartCount
-  } = useCart();
+  const { cartCount } = useCart();
+  const { theme, setTheme } = useTheme();
   return <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 bg-zinc-950">
+      <div className="container mx-auto px-4 bg-background">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
@@ -43,8 +43,19 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Cart & Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          {/* Theme Toggle, Cart & Mobile Menu */}
+          <div className="flex items-center space-x-2">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="relative"
+            >
+              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+            
             <CartSidebar>
               <Button variant="ghost" size="icon" className="relative">
                 <ShoppingCart className="h-5 w-5" />
