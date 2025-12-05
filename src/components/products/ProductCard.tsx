@@ -40,33 +40,33 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
             loading="lazy"
           />
           {discount > 0 && (
-            <Badge className="absolute top-2 left-2 bg-red-500 text-white">
+            <Badge className="absolute top-1.5 left-1.5 sm:top-2 sm:left-2 bg-red-500 text-white text-[10px] sm:text-xs px-1.5 sm:px-2">
               -{discount}%
             </Badge>
           )}
           {product.featured && (
-            <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground">
+            <Badge className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-primary text-primary-foreground text-[10px] sm:text-xs px-1.5 sm:px-2">
               Featured
             </Badge>
           )}
         </div>
       </Link>
 
-      <div className="p-4 space-y-3">
-        <div className="space-y-1">
-          <p className="text-sm text-muted-foreground">{product.brand}</p>
+      <div className="p-2.5 sm:p-4 space-y-2 sm:space-y-3">
+        <div className="space-y-0.5 sm:space-y-1">
+          <p className="text-xs sm:text-sm text-muted-foreground truncate">{product.brand}</p>
           <Link to={`/product/${product.slug}`}>
-            <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+            <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 text-xs sm:text-sm md:text-base leading-tight">
               {product.name}
             </h3>
           </Link>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <span className="price-pill">₹{product.price}</span>
+        <div className="flex items-center justify-between gap-1">
+          <div className="flex items-center gap-1 sm:gap-2 flex-wrap min-w-0">
+            <span className="price-pill text-xs sm:text-sm px-2 py-0.5 sm:px-3 sm:py-1">₹{product.price}</span>
             {product.original_price && (
-              <span className="text-sm text-muted-foreground line-through">
+              <span className="text-[10px] sm:text-sm text-muted-foreground line-through">
                 ₹{product.original_price}
               </span>
             )}
@@ -74,13 +74,13 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
           
           <Button
             size="icon"
-            className="rounded-full bg-primary hover:bg-primary-hover"
+            className="rounded-full bg-primary hover:bg-primary-hover h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0"
             onClick={(e) => {
               e.preventDefault();
               onAddToCart?.(product.id);
             }}
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </Button>
         </div>
       </div>

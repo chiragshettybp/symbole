@@ -94,62 +94,62 @@ const Cart = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Celebration Header */}
-        <div className="text-center mb-12 space-y-4">
+        <div className="text-center mb-6 sm:mb-8 md:mb-12 space-y-2 sm:space-y-4">
           <div className="flex items-center justify-center space-x-2">
-            <PartyPopper className="h-8 w-8 text-primary" />
-            <h1 className="text-4xl font-bold text-foreground">Congratulations!</h1>
-            <PartyPopper className="h-8 w-8 text-primary" />
+            <PartyPopper className="h-5 w-5 sm:h-8 sm:w-8 text-primary" />
+            <h1 className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground">Congratulations!</h1>
+            <PartyPopper className="h-5 w-5 sm:h-8 sm:w-8 text-primary" />
           </div>
-          <p className="text-xl text-primary font-semibold">
+          <p className="text-sm sm:text-base md:text-xl text-primary font-semibold">
             Thank you for being an Ordify customer! 🎉
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-6">
-            <h2 className="text-2xl font-bold text-foreground">Your Cart ({items.length} items)</h2>
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">Your Cart ({items.length} items)</h2>
             
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {items.map((item) => (
-                <div key={item.id} className="product-card p-6">
-                  <div className="flex flex-col md:flex-row gap-4">
+                <div key={item.id} className="product-card p-3 sm:p-4 md:p-6">
+                  <div className="flex gap-3 sm:gap-4">
                     {/* Product Image */}
                     <div className="flex-shrink-0">
                       <img
                         src={item.product?.images[0] || "/api/placeholder/120/120"}
                         alt={item.product?.name}
-                        className="w-24 h-24 object-cover rounded-lg"
+                        className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg"
                       />
                     </div>
 
                     {/* Product Details */}
-                    <div className="flex-grow space-y-2">
+                    <div className="flex-grow space-y-1 sm:space-y-2 min-w-0">
                       <div>
-                        <h3 className="font-semibold text-foreground">{item.product?.name}</h3>
-                        <p className="text-sm text-muted-foreground">{item.product?.brand}</p>
+                        <h3 className="font-semibold text-foreground text-sm sm:text-base line-clamp-2">{item.product?.name}</h3>
+                        <p className="text-xs sm:text-sm text-muted-foreground">{item.product?.brand}</p>
                       </div>
                       
-                      <div className="flex flex-wrap items-center gap-4 text-sm">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                         <span className="text-muted-foreground">Size: <span className="text-foreground font-medium">{item.size}</span></span>
                         <span className="text-muted-foreground">Color: <span className="text-foreground font-medium capitalize">{item.color}</span></span>
                       </div>
 
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
+                      <div className="flex items-center justify-between pt-1">
+                        <div className="flex items-center space-x-2 sm:space-x-3">
                           <Button
                             variant="outline"
                             size="icon"
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
                             disabled={item.quantity <= 1}
-                            className="h-8 w-8"
+                            className="h-8 w-8 min-h-[32px]"
                           >
                             <Minus className="h-3 w-3" />
                           </Button>
                           
-                          <span className="font-medium text-foreground min-w-[2rem] text-center">
+                          <span className="font-medium text-foreground min-w-[1.5rem] text-center text-sm">
                             {item.quantity}
                           </span>
                           
@@ -157,14 +157,14 @@ const Cart = () => {
                             variant="outline"
                             size="icon"
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="h-8 w-8"
+                            className="h-8 w-8 min-h-[32px]"
                           >
                             <Plus className="h-3 w-3" />
                           </Button>
                         </div>
 
-                        <div className="flex items-center space-x-4">
-                          <span className="font-bold text-lg text-foreground">
+                        <div className="flex items-center space-x-2 sm:space-x-4">
+                          <span className="font-bold text-sm sm:text-lg text-foreground">
                             ₹{((item.product?.price || 0) * item.quantity).toFixed(2)}
                           </span>
                           
@@ -172,7 +172,7 @@ const Cart = () => {
                             variant="ghost"
                             size="icon"
                             onClick={() => removeFromCart(item.id)}
-                            className="text-destructive hover:text-destructive"
+                            className="text-destructive hover:text-destructive h-8 w-8"
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
@@ -187,50 +187,50 @@ const Cart = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="product-card p-6 space-y-6">
-              <h2 className="text-xl font-bold text-foreground">Order Summary</h2>
+            <div className="product-card p-4 sm:p-6 space-y-4 sm:space-y-6 sticky top-20">
+              <h2 className="text-lg sm:text-xl font-bold text-foreground">Order Summary</h2>
               
-              <div className="space-y-4">
-                <div className="flex justify-between text-muted-foreground">
+              <div className="space-y-3 sm:space-y-4">
+                <div className="flex justify-between text-sm sm:text-base text-muted-foreground">
                   <span>Subtotal</span>
                   <span>₹{getSubTotal().toFixed(2)}</span>
                 </div>
                 
-                <div className="flex justify-between text-muted-foreground">
+                <div className="flex justify-between text-sm sm:text-base text-muted-foreground">
                   <span>Tax</span>
                   <span>₹{getTax().toFixed(2)}</span>
                 </div>
                 
-                <div className="flex justify-between text-muted-foreground">
+                <div className="flex justify-between text-sm sm:text-base text-muted-foreground">
                   <span>Shipping</span>
                   <span>Free</span>
                 </div>
                 
                 <Separator />
                 
-                <div className="flex justify-between text-lg font-bold text-foreground">
+                <div className="flex justify-between text-base sm:text-lg font-bold text-foreground">
                   <span>Total</span>
                   <span>₹{getCartTotal().toFixed(2)}</span>
                 </div>
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 <Link to="/checkout" className="block">
-                  <Button className="w-full btn-primary text-lg py-6">
+                  <Button className="w-full btn-primary text-sm sm:text-lg py-4 sm:py-6 min-h-[48px]">
                     Proceed to Checkout
                   </Button>
                 </Link>
                 
                 <Link to="/" className="block">
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full min-h-[44px]">
                     Continue Shopping
                   </Button>
                 </Link>
               </div>
 
               {/* Free Shipping Notice */}
-              <div className="bg-card border border-primary/20 rounded-lg p-4">
-                <p className="text-sm text-center">
+              <div className="bg-card border border-primary/20 rounded-lg p-3 sm:p-4">
+                <p className="text-xs sm:text-sm text-center">
                   <span className="text-primary font-semibold">🚚 Free Shipping</span> on all orders!
                 </p>
               </div>

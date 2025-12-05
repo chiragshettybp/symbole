@@ -50,14 +50,14 @@ const ProductGrid = () => {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
         {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="space-y-4">
-            <Skeleton className="aspect-square w-full" />
+          <div key={i} className="space-y-3">
+            <Skeleton className="aspect-square w-full rounded-lg" />
             <div className="space-y-2">
-              <Skeleton className="h-4 w-3/4" />
-              <Skeleton className="h-4 w-1/2" />
-              <Skeleton className="h-8 w-1/3" />
+              <Skeleton className="h-3 sm:h-4 w-3/4" />
+              <Skeleton className="h-3 sm:h-4 w-1/2" />
+              <Skeleton className="h-6 sm:h-8 w-1/3" />
             </div>
           </div>
         ))}
@@ -74,7 +74,7 @@ const ProductGrid = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
       {products.map((product) => (
         <ProductCard
           key={product.id}

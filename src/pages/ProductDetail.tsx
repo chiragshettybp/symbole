@@ -192,12 +192,12 @@ const ProductDetail = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {/* Image Gallery */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <div 
-              className="relative overflow-hidden rounded-2xl aspect-square cursor-zoom-in touch-none"
+              className="relative overflow-hidden rounded-xl sm:rounded-2xl aspect-square cursor-zoom-in touch-none"
               onMouseMove={handleMouseMove}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
@@ -236,7 +236,7 @@ const ProductDetail = () => {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white"
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white h-8 w-8 sm:h-10 sm:w-10"
                     onClick={prevImage}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -245,7 +245,7 @@ const ProductDetail = () => {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white h-8 w-8 sm:h-10 sm:w-10"
                     onClick={nextImage}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -256,12 +256,12 @@ const ProductDetail = () => {
             
             {/* Thumbnail Strip */}
             {product.images && product.images.length > 1 && (
-              <div className="flex space-x-2 overflow-x-auto">
+              <div className="flex space-x-2 overflow-x-auto pb-1 scrollbar-hide">
                 {product.images.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentImageIndex(index)}
-                    className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 ${
+                    className={`flex-shrink-0 w-14 h-14 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 ${
                       currentImageIndex === index ? 'border-primary' : 'border-border'
                     }`}
                   >
@@ -277,38 +277,38 @@ const ProductDetail = () => {
           </div>
 
           {/* Product Info - Dark Card Design */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Product Title */}
             <div>
-              <p className="text-muted-foreground mb-2">{product.brand}</p>
-              <h1 className="text-2xl font-bold text-foreground">{product.name}</h1>
+              <p className="text-sm sm:text-base text-muted-foreground mb-1 sm:mb-2">{product.brand}</p>
+              <h1 className="text-xl sm:text-2xl font-bold text-foreground">{product.name}</h1>
             </div>
 
             {/* Dark Purchase Card */}
-            <div className="bg-card border border-border rounded-2xl p-6 space-y-4">
-              <div className="flex items-center justify-between">
+            <div className="bg-card border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6 space-y-3 sm:space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0">
                 <div>
-                  <p className="text-sm text-muted-foreground">Buy Now for</p>
-                  <p className="text-3xl font-bold text-foreground">₹{product.price}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Buy Now for</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-foreground">₹{product.price}</p>
                 </div>
                 <div className="flex items-center space-x-2 text-primary">
-                  <div className="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
-                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-primary flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary rounded-full"></div>
                   </div>
-                  <span className="text-sm font-medium">Price is Below Retail</span>
+                  <span className="text-xs sm:text-sm font-medium">Price is Below Retail</span>
                 </div>
               </div>
 
               {/* Size Selection */}
               {product.sizes && product.sizes.length > 0 && (
-                <div className="space-y-3">
-                  <h3 className="font-medium text-foreground">SIZE</h3>
-                  <div className="grid grid-cols-4 gap-2">
+                <div className="space-y-2 sm:space-y-3">
+                  <h3 className="text-sm sm:text-base font-medium text-foreground">SIZE</h3>
+                  <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
                     {product.sizes.map((size) => (
                       <button
                         key={size}
                         onClick={() => setSelectedSize(size)}
-                        className={`py-2 rounded-lg border text-sm font-medium transition-all ${
+                        className={`py-2 sm:py-2.5 rounded-lg border text-xs sm:text-sm font-medium transition-all min-h-[44px] ${
                           selectedSize === size
                             ? 'border-primary bg-primary text-primary-foreground'
                             : 'border-border bg-background text-foreground hover:border-primary'
@@ -323,13 +323,13 @@ const ProductDetail = () => {
 
               <Button
                 onClick={handleAddToCart}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-4 rounded-xl text-lg"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 sm:py-4 rounded-xl text-base sm:text-lg min-h-[48px]"
                 size="lg"
               >
                 ADD TO CART
               </Button>
 
-              <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-xs sm:text-sm">
                 <span className="text-muted-foreground">
                   Last Sale: ₹{Math.floor(product.price * (1 + (Math.random() * 0.1 + 0.1)))}
                 </span>
@@ -344,60 +344,60 @@ const ProductDetail = () => {
 
             {/* Sell Section */}
             <div className="text-center">
-              <button className="text-primary hover:underline font-medium">
+              <button className="text-sm sm:text-base text-primary hover:underline font-medium">
                 Sell Now for ₹{Math.floor(product.price * 0.8)} or Ask for More →
               </button>
             </div>
 
             {/* Collapsible Sections */}
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <details className="group">
-                <summary className="flex items-center justify-between py-4 px-6 bg-card rounded-xl cursor-pointer hover:bg-card/80">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6">🛡️</div>
-                    <span className="font-medium">Worry Free Purchasing</span>
+                <summary className="flex items-center justify-between py-3 sm:py-4 px-4 sm:px-6 bg-card rounded-xl cursor-pointer hover:bg-card/80 min-h-[48px]">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6">🛡️</div>
+                    <span className="font-medium text-sm sm:text-base">Worry Free Purchasing</span>
                   </div>
-                  <ChevronRight className="w-5 h-5 transition-transform group-open:rotate-90" />
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-open:rotate-90 flex-shrink-0" />
                 </summary>
-                <div className="p-6 text-sm text-muted-foreground">
+                <div className="p-4 sm:p-6 text-xs sm:text-sm text-muted-foreground">
                   Every item is verified by our team of authenticators. We guarantee authenticity or your money back.
                 </div>
               </details>
 
               <details className="group">
-                <summary className="flex items-center justify-between py-4 px-6 bg-card rounded-xl cursor-pointer hover:bg-card/80">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6">🤝</div>
-                    <span className="font-medium">Buyer Promise</span>
+                <summary className="flex items-center justify-between py-3 sm:py-4 px-4 sm:px-6 bg-card rounded-xl cursor-pointer hover:bg-card/80 min-h-[48px]">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6">🤝</div>
+                    <span className="font-medium text-sm sm:text-base">Buyer Promise</span>
                   </div>
-                  <ChevronRight className="w-5 h-5 transition-transform group-open:rotate-90" />
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-open:rotate-90 flex-shrink-0" />
                 </summary>
-                <div className="p-6 text-sm text-muted-foreground">
+                <div className="p-4 sm:p-6 text-xs sm:text-sm text-muted-foreground">
                   Fast shipping, secure packaging, and hassle-free returns within 30 days.
                 </div>
               </details>
 
               <details className="group">
-                <summary className="flex items-center justify-between py-4 px-6 bg-card rounded-xl cursor-pointer hover:bg-card/80">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6">⚙️</div>
-                    <span className="font-medium">Our Process</span>
-                    <span className="ml-2 px-2 py-1 bg-primary text-primary-foreground text-xs rounded-full">
+                <summary className="flex items-center justify-between py-3 sm:py-4 px-4 sm:px-6 bg-card rounded-xl cursor-pointer hover:bg-card/80 min-h-[48px]">
+                  <div className="flex items-center space-x-2 sm:space-x-3 flex-wrap">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6">⚙️</div>
+                    <span className="font-medium text-sm sm:text-base">Our Process</span>
+                    <span className="px-2 py-0.5 bg-primary text-primary-foreground text-[10px] sm:text-xs rounded-full">
                       Condition: New
                     </span>
                   </div>
-                  <ChevronRight className="w-5 h-5 transition-transform group-open:rotate-90" />
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-open:rotate-90 flex-shrink-0" />
                 </summary>
-                <div className="p-6 text-sm text-muted-foreground">
+                <div className="p-4 sm:p-6 text-xs sm:text-sm text-muted-foreground">
                   Multi-point authentication process including material analysis, construction verification, and detailed inspection.
                 </div>
               </details>
             </div>
 
             {product.description && (
-              <div className="bg-card rounded-xl p-6">
-                <h3 className="font-semibold text-foreground mb-3">About This Item</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed whitespace-pre-line">{product.description}</p>
+              <div className="bg-card rounded-xl p-4 sm:p-6">
+                <h3 className="font-semibold text-foreground mb-2 sm:mb-3 text-sm sm:text-base">About This Item</h3>
+                <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed whitespace-pre-line">{product.description}</p>
               </div>
             )}
           </div>
@@ -405,9 +405,9 @@ const ProductDetail = () => {
 
         {/* Related Products */}
         {relatedProducts && relatedProducts.length > 0 && (
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold text-foreground mb-8">Related Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="mt-8 sm:mt-12 md:mt-16">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-4 sm:mb-6 md:mb-8">Related Products</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
               {relatedProducts.map((relatedProduct) => (
                 <div key={relatedProduct.id} className="product-card">
                   <a href={`/product/${relatedProduct.slug}`} className="block">
@@ -422,12 +422,12 @@ const ProductDetail = () => {
                         className="object-cover w-full h-full"
                       />
                     </div>
-                    <div className="p-4 space-y-2">
-                      <p className="text-sm text-muted-foreground">{relatedProduct.brand}</p>
-                      <h3 className="font-semibold text-foreground line-clamp-2">
+                    <div className="p-2.5 sm:p-4 space-y-1 sm:space-y-2">
+                      <p className="text-xs sm:text-sm text-muted-foreground truncate">{relatedProduct.brand}</p>
+                      <h3 className="font-semibold text-foreground line-clamp-2 text-xs sm:text-sm md:text-base leading-tight">
                         {relatedProduct.name}
                       </h3>
-                      <span className="price-pill">₹{relatedProduct.price}</span>
+                      <span className="price-pill text-xs sm:text-sm px-2 py-0.5 sm:px-3 sm:py-1">₹{relatedProduct.price}</span>
                     </div>
                   </a>
                 </div>

@@ -203,18 +203,18 @@ const Checkout = () => {
   return (
     <Layout>
       <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
           <div className="max-w-md mx-auto">
             {/* Header */}
-            <h1 className="text-3xl font-bold text-foreground mb-8 text-center tracking-wide">CHECKOUT</h1>
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6 md:mb-8 text-center tracking-wide">CHECKOUT</h1>
 
-            <form onSubmit={(e) => { e.preventDefault(); handlePlaceOrder(); }} className="space-y-8">
+            <form onSubmit={(e) => { e.preventDefault(); handlePlaceOrder(); }} className="space-y-5 sm:space-y-6 md:space-y-8">
               {/* Name Section */}
-              <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-foreground mb-4">Name</h2>
+              <div className="space-y-3 sm:space-y-4">
+                <h2 className="text-base sm:text-lg font-semibold text-foreground mb-3 sm:mb-4">Name</h2>
                 
                 <div className="space-y-1">
-                  <Label htmlFor="firstName" className="text-sm text-muted-foreground font-medium">
+                  <Label htmlFor="firstName" className="text-xs sm:text-sm text-muted-foreground font-medium">
                     First name <span className="text-red-500">*</span>
                   </Label>
                   <Input
@@ -222,14 +222,14 @@ const Checkout = () => {
                     type="text"
                     value={formData.firstName}
                     onChange={(e) => handleInputChange('firstName', e.target.value)}
-                    className="bg-card border-border text-foreground rounded-lg h-12 px-4 focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="bg-card border-border text-foreground rounded-lg h-11 sm:h-12 px-3 sm:px-4 focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
                     placeholder="First name"
                     required
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <Label htmlFor="phoneNumber" className="text-sm text-muted-foreground font-medium">
+                  <Label htmlFor="phoneNumber" className="text-xs sm:text-sm text-muted-foreground font-medium">
                     Phone Number <span className="text-red-500">*</span>
                   </Label>
                   <Input
@@ -237,14 +237,14 @@ const Checkout = () => {
                     type="tel"
                     value={formData.phoneNumber}
                     onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
-                    className="bg-card border-border text-foreground rounded-lg h-12 px-4 focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="bg-card border-border text-foreground rounded-lg h-11 sm:h-12 px-3 sm:px-4 focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
                     placeholder="+91 Phone Number"
                     required
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <Label htmlFor="email" className="text-sm text-muted-foreground font-medium">
+                  <Label htmlFor="email" className="text-xs sm:text-sm text-muted-foreground font-medium">
                     Email <span className="text-red-500">*</span>
                   </Label>
                   <Input
@@ -252,14 +252,14 @@ const Checkout = () => {
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    className="bg-card border-border text-foreground rounded-lg h-12 px-4 focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="bg-card border-border text-foreground rounded-lg h-11 sm:h-12 px-3 sm:px-4 focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
                     placeholder="Email"
                     required
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <Label htmlFor="instagramUsername" className="text-sm text-muted-foreground font-medium">
+                  <Label htmlFor="instagramUsername" className="text-xs sm:text-sm text-muted-foreground font-medium">
                     @Instagram Username
                   </Label>
                   <Input
@@ -267,18 +267,18 @@ const Checkout = () => {
                     type="text"
                     value={formData.instagramUsername}
                     onChange={(e) => handleInputChange('instagramUsername', e.target.value)}
-                    className="bg-card border-border text-foreground rounded-lg h-12 px-4 focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="bg-card border-border text-foreground rounded-lg h-11 sm:h-12 px-3 sm:px-4 focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
                     placeholder="@Instagram Username"
                   />
                 </div>
               </div>
 
               {/* Address Section */}
-              <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-foreground mb-4">Address</h2>
+              <div className="space-y-3 sm:space-y-4">
+                <h2 className="text-base sm:text-lg font-semibold text-foreground mb-3 sm:mb-4">Address</h2>
                 
                 <div className="space-y-1">
-                  <Label htmlFor="streetName" className="text-sm text-muted-foreground font-medium">
+                  <Label htmlFor="streetName" className="text-xs sm:text-sm text-muted-foreground font-medium">
                     Street name <span className="text-red-500">*</span>
                   </Label>
                   <Input
@@ -286,78 +286,82 @@ const Checkout = () => {
                     type="text"
                     value={formData.streetName}
                     onChange={(e) => handleInputChange('streetName', e.target.value)}
-                    className="bg-card border-border text-foreground rounded-lg h-12 px-4 focus:ring-2 focus:ring-primary focus:border-transparent"
+                    className="bg-card border-border text-foreground rounded-lg h-11 sm:h-12 px-3 sm:px-4 focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
                     placeholder="Street name"
                     required
                   />
                 </div>
 
-                <div className="space-y-1">
-                  <Label htmlFor="city" className="text-sm text-muted-foreground font-medium">
-                    City <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="city"
-                    type="text"
-                    value={formData.city}
-                    onChange={(e) => handleInputChange('city', e.target.value)}
-                    className="bg-card border-border text-foreground rounded-lg h-12 px-4 focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="City"
-                    required
-                  />
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <Label htmlFor="city" className="text-xs sm:text-sm text-muted-foreground font-medium">
+                      City <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="city"
+                      type="text"
+                      value={formData.city}
+                      onChange={(e) => handleInputChange('city', e.target.value)}
+                      className="bg-card border-border text-foreground rounded-lg h-11 sm:h-12 px-3 sm:px-4 focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
+                      placeholder="City"
+                      required
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <Label htmlFor="state" className="text-xs sm:text-sm text-muted-foreground font-medium">
+                      State <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="state"
+                      type="text"
+                      value={formData.state}
+                      onChange={(e) => handleInputChange('state', e.target.value)}
+                      className="bg-card border-border text-foreground rounded-lg h-11 sm:h-12 px-3 sm:px-4 focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
+                      placeholder="State"
+                      required
+                    />
+                  </div>
                 </div>
 
-                <div className="space-y-1">
-                  <Label htmlFor="state" className="text-sm text-muted-foreground font-medium">
-                    State <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="state"
-                    type="text"
-                    value={formData.state}
-                    onChange={(e) => handleInputChange('state', e.target.value)}
-                    className="bg-card border-border text-foreground rounded-lg h-12 px-4 focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="State"
-                    required
-                  />
-                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <Label htmlFor="pincode" className="text-xs sm:text-sm text-muted-foreground font-medium">
+                      Pincode <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="pincode"
+                      type="text"
+                      value={formData.pincode}
+                      onChange={(e) => handleInputChange('pincode', e.target.value)}
+                      className="bg-card border-border text-foreground rounded-lg h-11 sm:h-12 px-3 sm:px-4 focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base"
+                      placeholder="Pincode"
+                      required
+                    />
+                  </div>
 
-                <div className="space-y-1">
-                  <Label htmlFor="pincode" className="text-sm text-muted-foreground font-medium">
-                    Pincode <span className="text-red-500">*</span>
-                  </Label>
-                  <Input
-                    id="pincode"
-                    type="text"
-                    value={formData.pincode}
-                    onChange={(e) => handleInputChange('pincode', e.target.value)}
-                    className="bg-card border-border text-foreground rounded-lg h-12 px-4 focus:ring-2 focus:ring-primary focus:border-transparent"
-                    placeholder="Pincode"
-                    required
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <Label htmlFor="country" className="text-sm text-muted-foreground font-medium">
-                    Country <span className="text-red-500">*</span>
-                  </Label>
-                  <Select value={formData.country} onValueChange={(value) => handleInputChange('country', value)}>
-                    <SelectTrigger className="bg-card border-border text-foreground rounded-lg h-12 px-4 focus:ring-2 focus:ring-primary focus:border-transparent">
-                      <SelectValue placeholder="Select country" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-card border-border">
-                      <SelectItem value="India">India</SelectItem>
-                      <SelectItem value="USA">USA</SelectItem>
-                      <SelectItem value="UK">UK</SelectItem>
-                      <SelectItem value="Canada">Canada</SelectItem>
-                      <SelectItem value="Australia">Australia</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <div className="space-y-1">
+                    <Label htmlFor="country" className="text-xs sm:text-sm text-muted-foreground font-medium">
+                      Country <span className="text-red-500">*</span>
+                    </Label>
+                    <Select value={formData.country} onValueChange={(value) => handleInputChange('country', value)}>
+                      <SelectTrigger className="bg-card border-border text-foreground rounded-lg h-11 sm:h-12 px-3 sm:px-4 focus:ring-2 focus:ring-primary focus:border-transparent text-sm sm:text-base">
+                        <SelectValue placeholder="Select country" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-card border-border">
+                        <SelectItem value="India">India</SelectItem>
+                        <SelectItem value="USA">USA</SelectItem>
+                        <SelectItem value="UK">UK</SelectItem>
+                        <SelectItem value="Canada">Canada</SelectItem>
+                        <SelectItem value="Australia">Australia</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
               </div>
 
               {/* Privacy Notice */}
-              <div className="text-sm text-muted-foreground">
+              <div className="text-xs sm:text-sm text-muted-foreground">
                 <span className="text-primary">We respect your privacy</span>, your information will remain safe and secure.
               </div>
 
@@ -365,17 +369,17 @@ const Checkout = () => {
               <Button
                 type="submit"
                 disabled={isPlacingOrder}
-                className="w-full bg-primary hover:bg-primary-hover text-primary-foreground font-semibold py-4 rounded-lg text-lg tracking-wide transition-all duration-300 flex items-center justify-center gap-2"
+                className="w-full bg-primary hover:bg-primary-hover text-primary-foreground font-semibold py-3 sm:py-4 rounded-lg text-sm sm:text-lg tracking-wide transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
               >
                 {isPlacingOrder ? (
                   <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
                     Placing Order...
                   </>
                 ) : (
                   <>
                     PLACE ORDER
-                    <ArrowRight className="h-5 w-5" />
+                    <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
                   </>
                 )}
               </Button>

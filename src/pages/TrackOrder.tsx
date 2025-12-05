@@ -144,34 +144,34 @@ const TrackOrder = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-foreground mb-4">Track Your Order</h1>
-            <p className="text-muted-foreground">
+          <div className="text-center mb-6 sm:mb-8 md:mb-12">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 sm:mb-4">Track Your Order</h1>
+            <p className="text-sm sm:text-base text-muted-foreground">
               Enter your order number and email to track your shipment
             </p>
           </div>
 
           {/* Search Form */}
-          <div className="product-card p-8 mb-8">
-            <form onSubmit={handleSearch} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="orderNumber">Order Number *</Label>
+          <div className="product-card p-4 sm:p-6 md:p-8 mb-6 sm:mb-8">
+            <form onSubmit={handleSearch} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <div className="space-y-1">
+                  <Label htmlFor="orderNumber" className="text-xs sm:text-sm">Order Number *</Label>
                   <Input
                     id="orderNumber"
                     value={orderNumber}
                     onChange={(e) => setOrderNumber(e.target.value)}
                     placeholder="ORD-1234567890"
                     required
-                    className="bg-card border-border"
+                    className="bg-card border-border h-11 sm:h-12 text-sm sm:text-base"
                   />
                 </div>
                 
-                <div>
-                  <Label htmlFor="email">Email Address *</Label>
+                <div className="space-y-1">
+                  <Label htmlFor="email" className="text-xs sm:text-sm">Email Address *</Label>
                   <Input
                     id="email"
                     type="email"
@@ -179,7 +179,7 @@ const TrackOrder = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="john@example.com"
                     required
-                    className="bg-card border-border"
+                    className="bg-card border-border h-11 sm:h-12 text-sm sm:text-base"
                   />
                 </div>
               </div>
@@ -187,7 +187,7 @@ const TrackOrder = () => {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="w-full btn-primary"
+                className="w-full btn-primary min-h-[48px]"
               >
                 {isLoading ? (
                   <>

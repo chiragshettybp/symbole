@@ -78,37 +78,37 @@ const TrendingSneakers = () => {
             <Link
               key={product.id}
               to={`/product/${product.slug}`}
-              className="bg-card rounded-2xl py-4 block hover:shadow-lg transition-shadow"
+              className="bg-card rounded-xl p-2.5 block hover:shadow-lg transition-shadow"
             >
-              <div className="relative mb-3">
-                <div className="rounded-xl overflow-hidden">
+              <div className="relative mb-2">
+                <div className="rounded-lg overflow-hidden aspect-square">
                   <img
                     src={product.images[0] || "/placeholder.svg"}
                     alt={product.name}
-                    className="w-full h-auto object-contain block"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>
-                <button className="absolute top-3 right-3 w-8 h-8 bg-card-foreground/10 rounded-full flex items-center justify-center">
-                  <Heart className="w-4 h-4 text-muted-foreground" />
+                <button className="absolute top-2 right-2 w-7 h-7 bg-background/80 rounded-full flex items-center justify-center">
+                  <Heart className="w-3.5 h-3.5 text-muted-foreground" />
                 </button>
               </div>
               
-              <h3 className="font-semibold text-foreground text-sm leading-tight mb-1 line-clamp-2">
+              <h3 className="font-semibold text-foreground text-xs leading-tight mb-0.5 line-clamp-2 px-0.5">
                 {product.name}
               </h3>
               
-              <p className="text-xs text-muted-foreground mb-2">
+              <p className="text-[10px] text-muted-foreground mb-1 px-0.5">
                 Lowest Ask
               </p>
               
-              <p className="text-lg font-bold text-foreground mb-2">
+              <p className="text-sm font-bold text-foreground mb-1 px-0.5">
                 ₹{product.price}
               </p>
               
-              <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1 text-[10px] text-muted-foreground px-0.5">
                 <span>{generateSalesData()} sold</span>
-                <Rocket className="w-3 h-3" />
+                <Rocket className="w-2.5 h-2.5" />
               </div>
             </Link>
           ))}
