@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import { AdminProvider, useAdmin } from "@/contexts/AdminContext";
+import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
@@ -38,11 +39,12 @@ const ProtectedAdminRoute = ({ children }: { children: React.ReactNode }) => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <CartProvider>
-      <AdminProvider>
-        <TooltipProvider>
-          <Toaster />
-          <BrowserRouter>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <CartProvider>
+        <AdminProvider>
+          <TooltipProvider>
+            <Toaster />
+            <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/product/:slug" element={<ProductDetail />} />
@@ -72,10 +74,11 @@ const App = () => (
               
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </AdminProvider>
-    </CartProvider>
+            </BrowserRouter>
+          </TooltipProvider>
+        </AdminProvider>
+      </CartProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
