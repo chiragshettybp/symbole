@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import CartSidebar from "@/components/cart/CartSidebar";
-import logo from "@/assets/logo.png";
 import { useTheme } from "next-themes";
+import logoLight from "@/assets/logo-light.png";
+import logoDark from "@/assets/logo-dark.png";
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartCount } = useCart();
@@ -16,7 +18,7 @@ const Header = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <img src={logo} alt="Ordify - Imported Jackets & Apparels" className="h-8 w-auto" />
+            <img src={theme === 'dark' ? logoDark : logoLight} alt="Symbole - Imported Jackets & Apparels" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
