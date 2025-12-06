@@ -12,13 +12,17 @@ import logoDark from "@/assets/logo-dark.png";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartCount } = useCart();
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  
+  // Use resolvedTheme for accurate detection, default to dark logo
+  const currentLogo = resolvedTheme === 'light' ? logoLight : logoDark;
+  
   return <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-3 sm:px-4 bg-background">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <img src={theme === 'dark' ? logoDark : logoLight} alt="Symbole - Imported Jackets & Apparels" className="h-8 w-auto" />
+            <img src={currentLogo} alt="Symbole" className="h-6 sm:h-8 w-auto max-w-[140px] sm:max-w-[180px] object-contain" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -50,7 +54,7 @@ const Header = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
               className="relative"
             >
               <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
