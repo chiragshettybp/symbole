@@ -258,10 +258,10 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            {/* Sell Section */}
+            {/* Return Policy Section */}
             <div className="text-center">
               <button className="text-sm sm:text-base text-primary hover:underline font-medium">
-                Sell Now for ₹{Math.floor(product.price * 0.8)} or Ask for More →
+                7 Days Return and Exchange Available →
               </button>
             </div>
 
