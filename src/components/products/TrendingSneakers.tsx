@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Heart, Rocket, HelpCircle } from "lucide-react";
+import { Heart, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-
 interface Product {
   id: string;
   name: string;
@@ -13,33 +12,34 @@ interface Product {
   brand: string;
   featured?: boolean;
 }
-
 const TrendingSneakers = () => {
-  const { data: products, isLoading } = useQuery({
+  const {
+    data: products,
+    isLoading
+  } = useQuery({
     queryKey: ['trending-products'],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .neq('visible', false)
-        .order('created_at', { ascending: false });
-      
+      const {
+        data,
+        error
+      } = await supabase.from('products').select('*').neq('visible', false).order('created_at', {
+        ascending: false
+      });
       if (error) throw error;
       return data as Product[];
     }
   });
-
   if (isLoading) {
-    return (
-      <section className="bg-background py-8 md:hidden">
+    return <section className="bg-background py-8 md:hidden">
         <div className="px-4">
           <div className="flex items-center gap-2 mb-6">
             <h2 className="text-xl font-bold text-foreground">Trending Products</h2>
             <HelpCircle className="w-5 h-5 text-muted-foreground" />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="bg-card rounded-2xl p-4 animate-pulse">
+            {Array.from({
+            length: 4
+          }).map((_, i) => <div key={i} className="bg-card rounded-2xl p-4 animate-pulse">
                 <div className="aspect-square bg-muted rounded-xl mb-3"></div>
                 <div className="h-4 bg-muted rounded mb-2"></div>
                 <div className="h-3 bg-muted rounded mb-2 w-20"></div>
@@ -48,14 +48,11 @@ const TrendingSneakers = () => {
                   <div className="h-3 bg-muted rounded w-12"></div>
                   <div className="w-3 h-3 bg-muted rounded"></div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
-      </section>
-    );
+      </section>;
   }
-
   if (!products || products.length === 0) {
     return null;
   }
@@ -64,9 +61,7 @@ const TrendingSneakers = () => {
   const generateSalesData = () => {
     return Math.floor(Math.random() * 16); // 0 to 15
   };
-
-  return (
-    <section className="bg-background py-8 md:hidden">
+  return <section className="bg-background py-8 md:hidden">
       <div className="px-4">
         <div className="flex items-center gap-2 mb-6">
           <h2 className="text-xl font-bold text-foreground">Trending Products</h2>
@@ -74,20 +69,10 @@ const TrendingSneakers = () => {
         </div>
         
         <div className="grid grid-cols-2 gap-3">
-          {products.map((product, index) => (
-            <Link
-              key={product.id}
-              to={`/product/${product.slug}`}
-              className="block group"
-            >
+          {products.map((product, index) => <Link key={product.id} to={`/product/${product.slug}`} className="block group">
               <div className="relative mb-3">
                 <div className="rounded-2xl overflow-hidden aspect-[4/5] bg-muted">
-                  <img
-                    src={product.images[0] || "/placeholder.svg"}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
+                  <img src={product.images[0] || "/placeholder.svg"} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                 </div>
                 <button className="absolute top-3 right-3 w-8 h-8 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
                   <Heart className="w-4 h-4 text-muted-foreground" />
@@ -108,14 +93,11 @@ const TrendingSneakers = () => {
               
               <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <span>{generateSalesData()} sold in last 7 days</span>
-                <Rocket className="w-3 h-3" />
+                
               </div>
-            </Link>
-          ))}
+            </Link>)}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default TrendingSneakers;
