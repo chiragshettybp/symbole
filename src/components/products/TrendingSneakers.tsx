@@ -107,7 +107,7 @@ const TrendingSneakers = () => {
               </p>
               
               <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <span>{generateSalesData()} sold</span>
+                <span>{generateSalesData()} sold in last 7 days</span>
                 <Rocket className="w-3 h-3" />
               </div>
             </Link>
