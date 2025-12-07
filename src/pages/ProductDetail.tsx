@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useCart } from "@/contexts/CartContext";
+import { ProductReviews } from "@/components/reviews/ProductReviews";
 const ProductDetail = () => {
   const {
     slug
@@ -315,6 +316,17 @@ const ProductDetail = () => {
                 <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed whitespace-pre-line">{product.description}</p>
               </div>}
           </div>
+        </div>
+
+        {/* Product Reviews Section */}
+        <div className="mt-8 sm:mt-12 md:mt-16">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-4 sm:mb-6 md:mb-8">Customer Reviews</h2>
+          <ProductReviews
+            productId={product.id}
+            productName={product.name}
+            productImage={product.thumbnail_image || product.images?.[0]}
+            productPrice={product.price}
+          />
         </div>
 
         {/* Related Products */}

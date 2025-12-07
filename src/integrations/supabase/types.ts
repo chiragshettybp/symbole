@@ -424,6 +424,53 @@ export type Database = {
           },
         ]
       }
+      reviews: {
+        Row: {
+          created_at: string
+          id: string
+          photos: string[] | null
+          product_id: string
+          rating: number
+          review_text: string | null
+          updated_at: string
+          user_id: string | null
+          user_name: string
+          verified: boolean
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          photos?: string[] | null
+          product_id: string
+          rating: number
+          review_text?: string | null
+          updated_at?: string
+          user_id?: string | null
+          user_name?: string
+          verified?: boolean
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          photos?: string[] | null
+          product_id?: string
+          rating?: number
+          review_text?: string | null
+          updated_at?: string
+          user_id?: string | null
+          user_name?: string
+          verified?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       settings: {
         Row: {
           auto_generate_invoice: boolean
