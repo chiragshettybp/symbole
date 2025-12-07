@@ -70,14 +70,25 @@ const TrendingSneakers = () => {
         
         <div className="grid grid-cols-2 gap-3">
           {products.map((product, index) => <Link key={product.id} to={`/product/${product.slug}`} className="block group">
-              <div className="relative mb-3">
-                <div className="rounded-2xl overflow-hidden aspect-[4/5] bg-muted">
+              <div className="relative mb-2">
+                <div className="rounded-xl overflow-hidden aspect-square bg-muted">
                   <img src={product.images[0] || "/placeholder.svg"} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                 </div>
-                <button className="absolute top-3 right-3 w-8 h-8 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
-                  <Heart className="w-4 h-4 text-muted-foreground" />
+                <button className="absolute top-2 right-2 w-7 h-7 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
+                  <Heart className="w-3.5 h-3.5 text-muted-foreground" />
                 </button>
               </div>
+              
+              {/* Thumbnail images */}
+              {product.images.length > 1 && (
+                <div className="flex gap-1.5 mb-2">
+                  {product.images.slice(0, 4).map((img, imgIndex) => (
+                    <div key={imgIndex} className="w-8 h-8 rounded-md overflow-hidden bg-muted border border-border/50">
+                      <img src={img} alt={`${product.name} view ${imgIndex + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              )}
               
               <h3 className="font-medium text-foreground text-sm leading-snug mb-1 line-clamp-2">
                 {product.name}
