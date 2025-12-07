@@ -72,8 +72,9 @@ const TrendingSneakers = () => {
         
         <div className="grid grid-cols-2 gap-3">
           {products.map((product, index) => {
-          const currentImageIndex = selectedImages[product.id] || 0;
-          return <Link key={product.id} to={`/product/${product.slug}`} className="block group">
+            const currentImageIndex = selectedImages[product.id] || 0;
+            return (
+              <Link key={product.id} to={`/product/${product.slug}`} className="block group">
                 <div className="relative mb-2">
                   <div className="rounded-xl overflow-hidden aspect-square bg-muted">
                     <img src={product.images[currentImageIndex] || product.images[0] || "/placeholder.svg"} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
@@ -84,24 +85,31 @@ const TrendingSneakers = () => {
                 </div>
                 
                 {/* Thumbnail images */}
-                {product.images.length > 1 && <div className="flex gap-1.5 mb-2">
-                    {product.images.slice(0, 4).map((img, imgIndex) => <div key={imgIndex} className={`w-10 aspect-[4/5] rounded-md overflow-hidden bg-muted cursor-pointer border-2 transition-all ${currentImageIndex === imgIndex ? 'border-primary' : 'border-border/50 hover:border-primary/50'}`} onClick={e => {
-                e.preventDefault();
-                e.stopPropagation();
-                setSelectedImages(prev => ({
-                  ...prev,
-                  [product.id]: imgIndex
-                }));
-              }}>
+                {product.images.length > 1 && (
+                  <div className="flex gap-1.5 mb-2">
+                    {product.images.slice(0, 4).map((img, imgIndex) => (
+                      <div 
+                        key={imgIndex} 
+                        className={`w-10 aspect-[4/5] rounded-md overflow-hidden bg-muted cursor-pointer border-2 transition-all ${currentImageIndex === imgIndex ? 'border-primary' : 'border-border/50 hover:border-primary/50'}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setSelectedImages(prev => ({ ...prev, [product.id]: imgIndex }));
+                        }}
+                      >
                         <img src={img} alt={`${product.name} view ${imgIndex + 1}`} className="w-full h-full object-cover" loading="lazy" />
-                      </div>)}
-                  </div>}
+                      </div>
+                    ))}
+                  </div>
+                )}
               
                 <h3 className="font-medium text-foreground text-sm leading-snug mb-1 line-clamp-2">
                   {product.name}
                 </h3>
               
-                
+                <p className="text-xs text-muted-foreground mb-1">
+                  Lowest Ask
+                </p>
               
                 <p className="text-base font-bold text-foreground mb-1">
                   ₹{product.price.toLocaleString('en-IN')}
@@ -110,8 +118,9 @@ const TrendingSneakers = () => {
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                   <span>{generateSalesData()} sold in last 7 days</span>
                 </div>
-              </Link>;
-        })}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>;
