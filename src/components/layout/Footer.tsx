@@ -76,7 +76,7 @@ const Footer = () => {
 
           {/* Contact Section */}
           <FooterSection title="Contact">
-            <p className="text-sm text-muted-foreground">support@ordify.com</p>
+            <p className="text-sm text-muted-foreground">support@symbolebrand.com</p>
             <p className="text-sm text-muted-foreground">Mon - Sat, 10AM - 6PM</p>
           </FooterSection>
         </div>
@@ -94,7 +94,7 @@ const Footer = () => {
           <div className="flex flex-col gap-4">
             {/* Copyright */}
             <p className="text-xs text-muted-foreground">
-              © 2025 Ordify. All rights reserved
+              © 2025 SYMBOLE. All rights reserved
             </p>
 
             {/* Legal Links */}
