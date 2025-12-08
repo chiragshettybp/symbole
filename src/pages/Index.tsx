@@ -7,10 +7,10 @@ import { Badge } from "@/components/ui/badge";
 const Index = () => {
   return <Layout>
       {/* Trending Sneakers - Mobile Only */}
-      <TrendingSneakers />
+      <TrendingSneakers className="bg-[#fffcfc]" />
 
       {/* Featured Products */}
-      <section className="py-8 sm:py-12 md:py-16">
+      <section className="py-8 sm:py-12 md:py-16 bg-white">
         
       </section>
 
