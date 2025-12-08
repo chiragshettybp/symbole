@@ -1,76 +1,180 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { ChevronDown, Globe } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+
+interface FooterSectionProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+const FooterSection = ({ title, children }: FooterSectionProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      {/* Mobile: Collapsible */}
+      <div className="md:hidden border-t border-border">
+        <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+          <CollapsibleTrigger className="flex items-center justify-between w-full py-4 text-left">
+            <span className="font-medium text-foreground">{title}</span>
+            <ChevronDown
+              className={cn(
+                "w-5 h-5 text-muted-foreground transition-transform duration-200",
+                isOpen && "rotate-180"
+              )}
+            />
+          </CollapsibleTrigger>
+          <CollapsibleContent className="pb-4">
+            <div className="space-y-3">{children}</div>
+          </CollapsibleContent>
+        </Collapsible>
+      </div>
+
+      {/* Desktop: Always visible */}
+      <div className="hidden md:block space-y-4">
+        <h3 className="font-medium text-foreground">{title}</h3>
+        <div className="space-y-3">{children}</div>
+      </div>
+    </>
+  );
+};
 
 const Footer = () => {
   return (
-    <footer className="w-full border-t border-border bg-background">
-      <div className="container mx-auto px-3 sm:px-4 py-8 sm:py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-          {/* Brand */}
-          <div className="space-y-4">
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold">
-                <span className="text-foreground">Ordify</span>
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                Premium imported jackets, apparels, and more for every style.
-              </p>
-            </div>
-          </div>
+    <footer className="w-full bg-background">
+      <div className="container mx-auto px-4">
+        {/* Main Footer Sections */}
+        <div className="md:grid md:grid-cols-4 md:gap-8 md:py-12">
+          {/* Help Section */}
+          <FooterSection title="Help">
+            <Link
+              to="/track-order"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Track Order
+            </Link>
+            <Link
+              to="/shipping"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Delivery & Returns
+            </Link>
+            <Link
+              to="/faq"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              FAQ
+            </Link>
+          </FooterSection>
 
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-foreground">Shop</h3>
-            <div className="space-y-2">
-              <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                All Products
-              </Link>
-              <Link to="/new-arrivals" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                New Arrivals
-              </Link>
-              <Link to="/sale" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                Sale
-              </Link>
-            </div>
-          </div>
+          {/* Company Section */}
+          <FooterSection title="Company">
+            <Link
+              to="/"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              About Ordify
+            </Link>
+            <Link
+              to="/new-arrivals"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              New Arrivals
+            </Link>
+            <Link
+              to="/sale"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Sale
+            </Link>
+          </FooterSection>
 
-          {/* Support */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-foreground">Support</h3>
-            <div className="space-y-2">
-              <Link to="/track-order" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                Track Your Order
-              </Link>
-              <Link to="/shipping" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                Shipping & Returns
-              </Link>
-              <Link to="/faq" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                FAQ
-              </Link>
-            </div>
-          </div>
+          {/* Shop Section */}
+          <FooterSection title="Shop">
+            <Link
+              to="/"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              All Products
+            </Link>
+            <Link
+              to="/jackets"
+              className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Jackets
+            </Link>
+          </FooterSection>
 
-          {/* Legal */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold text-foreground">Legal</h3>
-            <div className="space-y-2">
-              <Link to="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                Terms & Conditions
-              </Link>
-              <Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                Privacy Policy
-              </Link>
-            </div>
+          {/* Contact Section */}
+          <FooterSection title="Contact">
+            <p className="text-sm text-muted-foreground">support@ordify.com</p>
+            <p className="text-sm text-muted-foreground">Mon - Sat, 10AM - 6PM</p>
+          </FooterSection>
+        </div>
+
+        {/* Location */}
+        <div className="py-4 border-t border-border md:border-t-0">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Globe className="w-4 h-4" />
+            <span>India</span>
           </div>
         </div>
 
-        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-border col-span-2 md:col-span-4">
-          <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              &copy; 2024 Ordify. All rights reserved.
+        {/* Bottom Section */}
+        <div className="py-6 border-t border-border">
+          <div className="flex flex-col gap-4">
+            {/* Copyright */}
+            <p className="text-xs text-muted-foreground">
+              © 2025 Ordify. All rights reserved
             </p>
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              Created by <span className="text-primary">Ordify</span>
-            </p>
+
+            {/* Legal Links */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <Collapsible>
+                <CollapsibleTrigger className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                  Guides
+                  <ChevronDown className="w-3 h-3" />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="mt-2 space-y-2">
+                  <Link
+                    to="/shipping"
+                    className="block text-xs text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Shipping Guide
+                  </Link>
+                  <Link
+                    to="/faq"
+                    className="block text-xs text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Size Guide
+                  </Link>
+                </CollapsibleContent>
+              </Collapsible>
+              <Link
+                to="/terms"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Terms of Sale
+              </Link>
+              <Link
+                to="/terms"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Terms of Use
+              </Link>
+              <Link
+                to="/privacy"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Privacy Policy
+              </Link>
+            </div>
           </div>
         </div>
       </div>

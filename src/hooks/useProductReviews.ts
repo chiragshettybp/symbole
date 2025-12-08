@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
@@ -23,19 +23,18 @@ export interface ReviewStats {
 
 export type ReviewFilter = 'all' | 'verified' | 'latest' | 'detailed';
 
-export const useProductReviews = (productId: string) => {
+export const useProductReviews = () => {
   const queryClient = useQueryClient();
   const [filter, setFilter] = useState<ReviewFilter>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Fetch reviews with filters
+  // Fetch ALL reviews globally with filters
   const { data: reviews = [], isLoading: reviewsLoading } = useQuery({
-    queryKey: ['reviews', productId, filter, searchQuery],
+    queryKey: ['reviews', 'global', filter, searchQuery],
     queryFn: async () => {
       let query = supabase
         .from('reviews')
         .select('*')
-        .eq('product_id', productId)
         .order('created_at', { ascending: false });
 
       if (filter === 'verified') {
@@ -52,17 +51,15 @@ export const useProductReviews = (productId: string) => {
       if (error) throw error;
       return data as Review[];
     },
-    enabled: !!productId,
   });
 
-  // Fetch review stats
+  // Fetch global review stats
   const { data: stats } = useQuery({
-    queryKey: ['reviewStats', productId],
+    queryKey: ['reviewStats', 'global'],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('reviews')
-        .select('rating')
-        .eq('product_id', productId);
+        .select('rating');
 
       if (error) throw error;
 
@@ -82,51 +79,25 @@ export const useProductReviews = (productId: string) => {
         distribution,
       } as ReviewStats;
     },
-    enabled: !!productId,
   });
 
-  // Check if user has already reviewed
-  const { data: userReview } = useQuery({
-    queryKey: ['userReview', productId],
-    queryFn: async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return null;
-
-      const { data, error } = await supabase
-        .from('reviews')
-        .select('*')
-        .eq('product_id', productId)
-        .eq('user_id', user.id)
-        .maybeSingle();
-
-      if (error) throw error;
-      return data as Review | null;
-    },
-    enabled: !!productId,
-  });
-
-  // Check if user has purchased the product (for verified badge)
-  const { data: hasPurchased } = useQuery({
-    queryKey: ['hasPurchased', productId],
+  // Check if user has ever made any order (for verified badge)
+  const { data: hasAnyOrder } = useQuery({
+    queryKey: ['hasAnyOrder'],
     queryFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return false;
 
       const { data, error } = await supabase
         .from('orders')
-        .select('id, items')
+        .select('id')
         .eq('customer_email', user.email)
-        .in('status', ['delivered', 'completed']);
+        .in('status', ['delivered', 'completed'])
+        .limit(1);
 
       if (error) return false;
-
-      // Check if any order contains this product
-      return data.some((order) => {
-        const items = order.items as any[];
-        return items?.some((item) => item.product_id === productId);
-      });
+      return data && data.length > 0;
     },
-    enabled: !!productId,
   });
 
   // Submit review mutation
@@ -145,13 +116,13 @@ export const useProductReviews = (productId: string) => {
       const { data: { user } } = await supabase.auth.getUser();
 
       const reviewData = {
-        product_id: productId,
+        product_id: '00000000-0000-0000-0000-000000000000', // Placeholder for global reviews
         user_id: user?.id || null,
         user_name: userName,
         rating,
         review_text: reviewText || null,
         photos: photos || [],
-        verified: hasPurchased || false,
+        verified: hasAnyOrder || false,
       };
 
       const { data, error } = await supabase
@@ -164,17 +135,12 @@ export const useProductReviews = (productId: string) => {
       return data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['reviews', productId] });
-      queryClient.invalidateQueries({ queryKey: ['reviewStats', productId] });
-      queryClient.invalidateQueries({ queryKey: ['userReview', productId] });
+      queryClient.invalidateQueries({ queryKey: ['reviews', 'global'] });
+      queryClient.invalidateQueries({ queryKey: ['reviewStats', 'global'] });
       toast.success('Review submitted successfully!');
     },
-    onError: (error: any) => {
-      if (error.code === '23505') {
-        toast.error('You have already reviewed this product');
-      } else {
-        toast.error('Failed to submit review');
-      }
+    onError: () => {
+      toast.error('Failed to submit review');
     },
   });
 
@@ -211,8 +177,7 @@ export const useProductReviews = (productId: string) => {
     setFilter,
     searchQuery,
     setSearchQuery,
-    userReview,
-    hasPurchased,
+    hasAnyOrder,
     submitReview,
     uploadPhotos,
   };
