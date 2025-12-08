@@ -54,7 +54,7 @@ const Footer = () => {
           {/* Company Section */}
           <FooterSection title="Company">
             <Link to="/" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
-              About Ordify
+              About Symbole
             </Link>
             <Link to="/new-arrivals" className="block text-sm text-muted-foreground hover:text-foreground transition-colors">
               New Arrivals
