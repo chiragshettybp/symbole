@@ -1,10 +1,8 @@
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Truck, PackageCheck, RefreshCw, Shield } from "lucide-react";
-
 const Shipping = () => {
-  return (
-    <Layout>
+  return <Layout>
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
@@ -34,7 +32,7 @@ const Shipping = () => {
                 <div>
                   <h3 className="font-semibold mb-2">Shipping Costs</h3>
                   <p className="text-muted-foreground">
-                    Free shipping on orders over ₹2,999. Standard shipping fee of ₹199 applies to orders below this amount.
+                    Free shipping on orders over ₹2,999. Standard shipping fee of ₹49 applies to orders below this amount.
                   </p>
                 </div>
                 <div>
@@ -111,8 +109,6 @@ const Shipping = () => {
           </div>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default Shipping;
