@@ -299,8 +299,8 @@ const ProductDetail = () => {
                   <div className="flex items-center space-x-2 sm:space-x-3 flex-wrap">
                     <div className="w-5 h-5 sm:w-6 sm:h-6">⚙️</div>
                     <span className="font-medium text-sm sm:text-base">Our Process</span>
-                    <span className="px-2 py-0.5 bg-primary text-primary-foreground text-[10px] sm:text-xs rounded-full">
-                      Condition: New
+                    <span className="px-2 py-0.5 text-primary-foreground text-[10px] sm:text-xs rounded-full bg-[#116b05]">
+                      Quality Assurance 
                     </span>
                   </div>
                   <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-open:rotate-90 flex-shrink-0" />
