@@ -429,7 +429,7 @@ export type Database = {
           created_at: string
           id: string
           photos: string[] | null
-          product_id: string
+          product_id: string | null
           rating: number
           review_text: string | null
           updated_at: string
@@ -441,7 +441,7 @@ export type Database = {
           created_at?: string
           id?: string
           photos?: string[] | null
-          product_id: string
+          product_id?: string | null
           rating: number
           review_text?: string | null
           updated_at?: string
@@ -453,7 +453,7 @@ export type Database = {
           created_at?: string
           id?: string
           photos?: string[] | null
-          product_id?: string
+          product_id?: string | null
           rating?: number
           review_text?: string | null
           updated_at?: string
@@ -461,15 +461,7 @@ export type Database = {
           user_name?: string
           verified?: boolean
         }
-        Relationships: [
-          {
-            foreignKeyName: "reviews_product_id_fkey"
-            columns: ["product_id"]
-            isOneToOne: false
-            referencedRelation: "products"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       settings: {
         Row: {

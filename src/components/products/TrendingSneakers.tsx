@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Heart, HelpCircle } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 interface Product {
   id: string;
@@ -79,9 +79,6 @@ const TrendingSneakers = () => {
                   <div className="rounded-xl overflow-hidden aspect-square bg-muted">
                     <img src={product.images[currentImageIndex] || product.images[0] || "/placeholder.svg"} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                   </div>
-                  <button className="absolute top-2 right-2 w-7 h-7 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm">
-                    <Heart className="w-3.5 h-3.5 text-muted-foreground" />
-                  </button>
                 </div>
                 
                 {/* Thumbnail images */}
