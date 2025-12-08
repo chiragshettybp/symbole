@@ -26,10 +26,10 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Light theme base colors */
-    --background: 0 0% 98%;
+    --background: 0 0% 100%;
     --foreground: 0 0% 9%;
 
-    --card: 0 0% 100%;
+    --card: 0 0% 94.902%;
     --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
@@ -41,10 +41,10 @@ All colors MUST be HSL.
     --primary-hover: 0 0% 25%;
     --primary-glow: 0 0% 10%;
 
-    --secondary: 0 100% 99.8039%;
+    --secondary: 0 0% 100%;
     --secondary-foreground: 0 0% 0%;
 
-    --muted: 0 0% 93%;
+    --muted: 0 0% 80%;
     --muted-foreground: 0 0% 45%;
 
     --accent: 0 0% 100%;
@@ -55,7 +55,7 @@ All colors MUST be HSL.
 
     --border: 0 0% 85%;
     --input: 0 0% 85%;
-    --ring: 0 0% 0%;
+    --ring: 214 31.8182% 91.3725%;
 
     --radius: 0.75rem;
     
