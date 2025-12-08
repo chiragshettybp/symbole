@@ -1,9 +1,7 @@
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
-
 const Terms = () => {
-  return (
-    <Layout>
+  return <Layout>
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
@@ -20,14 +18,14 @@ const Terms = () => {
               <section>
                 <h2 className="text-2xl font-bold text-foreground mb-4">1. Agreement to Terms</h2>
                 <p className="text-muted-foreground">
-                  By accessing and using Ordify, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these terms, please do not use our services.
+                  By accessing and using Symbole , you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these terms, please do not use our services.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-bold text-foreground mb-4">2. Use License</h2>
                 <p className="text-muted-foreground mb-3">
-                  Permission is granted to temporarily access the materials on Ordify for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+                  Permission is granted to temporarily access the materials on Symbole for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
                 </p>
                 <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                   <li>Modify or copy the materials</li>
@@ -68,14 +66,14 @@ const Terms = () => {
               <section>
                 <h2 className="text-2xl font-bold text-foreground mb-4">7. Intellectual Property</h2>
                 <p className="text-muted-foreground">
-                  All content on this website, including text, graphics, logos, images, and software, is the property of Ordify and is protected by copyright and trademark laws. Unauthorized use of any content may violate copyright, trademark, and other laws.
+                  All content on this website, including text, graphics, logos, images, and software, is the property of Symbole and is protected by copyright and trademark laws. Unauthorized use of any content may violate copyright, trademark, and other laws.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-bold text-foreground mb-4">8. Limitation of Liability</h2>
                 <p className="text-muted-foreground">
-                  Ordify Sneakers shall not be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with your use of our website or products, even if we have been advised of the possibility of such damages.
+                  Symbole shall not be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with your use of our website or products, even if we have been advised of the possibility of such damages.
                 </p>
               </section>
 
@@ -96,8 +94,6 @@ const Terms = () => {
           </Card>
         </div>
       </section>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default Terms;
