@@ -116,7 +116,6 @@ export const useProductReviews = () => {
       const { data: { user } } = await supabase.auth.getUser();
 
       const reviewData = {
-        product_id: '00000000-0000-0000-0000-000000000000', // Placeholder for global reviews
         user_id: user?.id || null,
         user_name: userName,
         rating,
