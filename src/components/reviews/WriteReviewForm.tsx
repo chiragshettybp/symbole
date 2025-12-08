@@ -8,9 +8,6 @@ import { StarRating } from './StarRating';
 import { cn } from '@/lib/utils';
 
 interface WriteReviewFormProps {
-  productName?: string;
-  productImage?: string;
-  productPrice?: number;
   onSubmit: (data: {
     rating: number;
     reviewText?: string;
@@ -23,9 +20,6 @@ interface WriteReviewFormProps {
 }
 
 export const WriteReviewForm = ({
-  productName,
-  productImage,
-  productPrice,
   onSubmit,
   onCancel,
   isSubmitting = false,
@@ -76,37 +70,10 @@ export const WriteReviewForm = ({
 
   return (
     <div className={cn('flex flex-col h-full', className)}>
-      {/* Product Info */}
-      {productName && (
-        <div className="flex items-center gap-3 p-4 border-b border-border">
-          <div className="w-16 h-16 bg-muted rounded-lg overflow-hidden flex-shrink-0">
-            {productImage ? (
-              <img
-                src={productImage}
-                alt={productName}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                No img
-              </div>
-            )}
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="font-medium text-foreground truncate">{productName}</h3>
-            {productPrice && (
-              <p className="text-sm text-foreground font-semibold mt-1">
-                ₹{productPrice.toLocaleString()}
-              </p>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* Form Content */}
       <div className="flex-1 overflow-auto p-4 space-y-6">
         <div className="text-center">
-          <h2 className="text-xl font-semibold text-foreground">How is your order?</h2>
+          <h2 className="text-xl font-semibold text-foreground">Write your review</h2>
         </div>
 
         {/* Name Input */}

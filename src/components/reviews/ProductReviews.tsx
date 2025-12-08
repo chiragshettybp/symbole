@@ -16,20 +16,10 @@ import { useProductReviews } from '@/hooks/useProductReviews';
 import { cn } from '@/lib/utils';
 
 interface ProductReviewsProps {
-  productId: string;
-  productName?: string;
-  productImage?: string;
-  productPrice?: number;
   className?: string;
 }
 
-export const ProductReviews = ({
-  productId,
-  productName,
-  productImage,
-  productPrice,
-  className,
-}: ProductReviewsProps) => {
+export const ProductReviews = ({ className }: ProductReviewsProps) => {
   const [showWriteReview, setShowWriteReview] = useState(false);
 
   const {
@@ -42,7 +32,7 @@ export const ProductReviews = ({
     setSearchQuery,
     submitReview,
     uploadPhotos,
-  } = useProductReviews(productId);
+  } = useProductReviews();
 
   const handleSubmitReview = async (data: {
     rating: number;
@@ -196,9 +186,6 @@ export const ProductReviews = ({
             <SheetTitle>Write a Review</SheetTitle>
           </SheetHeader>
           <WriteReviewForm
-            productName={productName}
-            productImage={productImage}
-            productPrice={productPrice}
             onSubmit={handleSubmitReview}
             onCancel={() => setShowWriteReview(false)}
             isSubmitting={submitReview.isPending}
