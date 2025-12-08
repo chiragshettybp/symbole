@@ -6,17 +6,22 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { Separator } from '@/components/ui/separator';
 import { ShoppingCart, Minus, Plus, Trash2, X } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-
 interface CartSidebarProps {
   children: React.ReactNode;
 }
-
-const CartSidebar = ({ children }: CartSidebarProps) => {
+const CartSidebar = ({
+  children
+}: CartSidebarProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { items, isLoading, removeFromCart, updateQuantity, getSubTotal, cartCount } = useCart();
-
-  return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+  const {
+    items,
+    isLoading,
+    removeFromCart,
+    updateQuantity,
+    getSubTotal,
+    cartCount
+  } = useCart();
+  return <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         {children}
       </SheetTrigger>
@@ -30,11 +35,9 @@ const CartSidebar = ({ children }: CartSidebarProps) => {
           </div>
         </SheetHeader>
 
-        {isLoading ? (
-          <div className="flex-1 p-4 sm:p-6">
+        {isLoading ? <div className="flex-1 p-4 sm:p-6">
             <div className="space-y-3 sm:space-y-4">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="animate-pulse">
+              {[1, 2, 3].map(i => <div key={i} className="animate-pulse">
                   <div className="flex space-x-3 sm:space-x-4">
                     <div className="w-14 h-14 sm:w-16 sm:h-16 bg-muted rounded-lg"></div>
                     <div className="flex-1 space-y-2">
@@ -42,12 +45,9 @@ const CartSidebar = ({ children }: CartSidebarProps) => {
                       <div className="h-3 bg-muted rounded w-1/2"></div>
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
-          </div>
-        ) : items.length === 0 ? (
-          <div className="flex-1 flex items-center justify-center p-4 sm:p-6">
+          </div> : items.length === 0 ? <div className="flex-1 flex items-center justify-center p-4 sm:p-6">
             <div className="text-center space-y-3 sm:space-y-4">
               <ShoppingCart className="h-12 w-12 sm:h-16 sm:w-16 mx-auto text-muted-foreground" />
               <div className="space-y-1 sm:space-y-2">
@@ -56,26 +56,16 @@ const CartSidebar = ({ children }: CartSidebarProps) => {
                   Add some products to get started!
                 </p>
               </div>
-              <Button 
-                onClick={() => setIsOpen(false)} 
-                className="btn-primary"
-              >
+              <Button onClick={() => setIsOpen(false)} className="btn-primary">
                 Start Shopping
               </Button>
             </div>
-          </div>
-        ) : (
-          <>
+          </div> : <>
             {/* Cart Items */}
             <div className="flex-1 overflow-auto p-4 sm:p-6 pt-0">
               <div className="space-y-3 sm:space-y-4">
-                {items.map((item) => (
-                  <div key={item.id} className="flex space-x-3 sm:space-x-4 p-3 sm:p-4 bg-card rounded-lg border border-border">
-                    <img
-                      src={item.product?.images[0] || "/api/placeholder/80/80"}
-                      alt={item.product?.name}
-                      className="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded-lg"
-                    />
+                {items.map(item => <div key={item.id} className="flex space-x-3 sm:space-x-4 p-3 sm:p-4 bg-card rounded-lg border border-border">
+                    <img src={item.product?.images[0] || "/api/placeholder/80/80"} alt={item.product?.name} className="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded-lg" />
                     
                     <div className="flex-1 min-w-0">
                       <h4 className="font-semibold text-foreground text-xs sm:text-sm truncate">
@@ -93,13 +83,7 @@ const CartSidebar = ({ children }: CartSidebarProps) => {
                       <div className="flex items-center justify-between mt-1.5 sm:mt-2">
                         {/* Quantity Controls */}
                         <div className="flex items-center space-x-1.5 sm:space-x-2">
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-6 w-6"
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            disabled={item.quantity <= 1}
-                          >
+                          <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
                             <Minus className="h-3 w-3" />
                           </Button>
                           
@@ -107,12 +91,7 @@ const CartSidebar = ({ children }: CartSidebarProps) => {
                             {item.quantity}
                           </span>
                           
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="h-6 w-6"
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          >
+                          <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
                             <Plus className="h-3 w-3" />
                           </Button>
                         </div>
@@ -122,19 +101,13 @@ const CartSidebar = ({ children }: CartSidebarProps) => {
                           <span className="font-semibold text-xs sm:text-sm text-foreground">
                             ₹{((item.product?.price || 0) * item.quantity).toFixed(2)}
                           </span>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-6 w-6 text-destructive hover:text-destructive"
-                            onClick={() => removeFromCart(item.id)}
-                          >
+                          <Button variant="ghost" size="icon" className="h-6 w-6 text-destructive hover:text-destructive" onClick={() => removeFromCart(item.id)}>
                             <Trash2 className="h-3 w-3" />
                           </Button>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
 
@@ -160,7 +133,7 @@ const CartSidebar = ({ children }: CartSidebarProps) => {
                 </Link>
                 
                 <Link to="/checkout" className="block" onClick={() => setIsOpen(false)}>
-                  <Button className="w-full btn-primary min-h-[44px]">
+                  <Button className="w-full btn-primary min-h-[44px] bg-black">
                     Checkout
                   </Button>
                 </Link>
@@ -168,16 +141,13 @@ const CartSidebar = ({ children }: CartSidebarProps) => {
 
               {/* Free Shipping Notice */}
               <div className="bg-primary/10 border border-primary/20 rounded-lg p-2.5 sm:p-3">
-                <p className="text-[10px] sm:text-xs text-center text-primary font-medium">
-                  🚚 Free shipping on all orders!
+                <p className="sm:text-xs text-center text-primary font-medium text-xs">
+                  7 Days Return and Exchange 
                 </p>
               </div>
             </div>
-          </>
-        )}
+          </>}
       </SheetContent>
-    </Sheet>
-  );
+    </Sheet>;
 };
-
 export default CartSidebar;
