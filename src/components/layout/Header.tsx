@@ -1,31 +1,21 @@
-import { Search, ShoppingCart, Menu, Sun, Moon } from "lucide-react";
+import { Search, ShoppingCart, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import CartSidebar from "@/components/cart/CartSidebar";
-import { useTheme } from "next-themes";
 import logoLight from "@/assets/logo-light.png";
-import logoDark from "@/assets/logo-dark.png";
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {
-    cartCount
-  } = useCart();
-  const {
-    resolvedTheme,
-    setTheme
-  } = useTheme();
-
-  // Use resolvedTheme for accurate detection, default to dark logo
-  const currentLogo = resolvedTheme === 'light' ? logoLight : logoDark;
+  const { cartCount } = useCart();
   return <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-3 sm:px-4 bg-white">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <img src={currentLogo} alt="Symbole" className="h-6 sm:h-8 w-auto max-w-[140px] sm:max-w-[180px] object-contain" />
+            <img src={logoLight} alt="Ordify" className="h-6 sm:h-8 w-auto max-w-[140px] sm:max-w-[180px] object-contain" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -52,13 +42,8 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Theme Toggle, Cart & Mobile Menu */}
+          {/* Cart & Mobile Menu */}
           <div className="flex items-center space-x-2">
-            <Button variant="ghost" size="icon" onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} className="relative">
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
-            </Button>
             
             <CartSidebar>
               <Button variant="ghost" size="icon" className="relative">

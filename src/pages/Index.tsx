@@ -1,21 +1,17 @@
 import Layout from "@/components/layout/Layout";
-import ProductGrid from "@/components/products/ProductGrid";
 import TrendingSneakers from "@/components/products/TrendingSneakers";
-import FAQ from "@/components/FAQ";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import HeroBanner from "@/components/layout/HeroBanner";
+
 const Index = () => {
-  return <Layout>
+  return (
+    <Layout>
+      {/* Hero Banner */}
+      <HeroBanner />
+
       {/* Trending Sneakers - Mobile Only */}
-      <TrendingSneakers className="bg-white" />
-
-      {/* Featured Products */}
-      <section className="py-8 sm:py-12 md:py-16 bg-white">
-        
-      </section>
-
-      {/* FAQ Section */}
-      
-    </Layout>;
+      <TrendingSneakers />
+    </Layout>
+  );
 };
+
 export default Index;
