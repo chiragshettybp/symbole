@@ -216,7 +216,7 @@ const ProductDetail = () => {
           <div className="space-y-4 sm:space-y-6">
             {/* Product Title */}
             <div>
-              <p className="text-sm sm:text-base text-muted-foreground mb-1 sm:mb-2">{product.brand}</p>
+              
               <h1 className="text-xl sm:text-2xl font-bold text-foreground">{product.name}</h1>
             </div>
 
