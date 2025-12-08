@@ -306,7 +306,7 @@ const ProductDetail = () => {
                   <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-open:rotate-90 flex-shrink-0" />
                 </summary>
                 <div className="p-4 sm:p-6 text-xs sm:text-sm text-muted-foreground">
-                  Multi-point authentication process including material analysis, construction verification, and detailed inspection.
+                  Multi-point authentication process including material analysis, construction verification, and detailed inspection before dispatching.  
                 </div>
               </details>
             </div>
