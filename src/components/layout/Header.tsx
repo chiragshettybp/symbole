@@ -6,16 +6,17 @@ import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import CartSidebar from "@/components/cart/CartSidebar";
 import logoLight from "@/assets/logo-light.png";
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { cartCount } = useCart();
+  const {
+    cartCount
+  } = useCart();
   return <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-3 sm:px-4 bg-white">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <img src={logoLight} alt="Ordify" className="h-6 sm:h-8 w-auto max-w-[140px] sm:max-w-[180px] object-contain" />
+            <img alt="Ordify" className="h-6 sm:h-8 w-auto max-w-[140px] sm:max-w-[180px] object-contain" src="/lovable-uploads/fd6a3364-2e6b-4ae0-a7e7-17f87b52ec21.png" />
           </Link>
 
           {/* Desktop Navigation */}
