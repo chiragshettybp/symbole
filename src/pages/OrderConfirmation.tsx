@@ -166,7 +166,7 @@ const OrderConfirmation = () => {
               <p className="text-xl text-success font-semibold">
                 Thank you for your purchase, {order.customer_name}!
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Your order has been received and is being processed.
               </p>
             </div>
