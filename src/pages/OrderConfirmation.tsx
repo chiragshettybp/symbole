@@ -3,9 +3,8 @@ import { useParams, useLocation, Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { CheckCircle, Package, Truck, Calendar, PartyPopper } from 'lucide-react';
+import { CheckCircle, Package, Truck, Calendar } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
-
 interface OrderItem {
   product_name: string;
   brand: string;
@@ -15,7 +14,6 @@ interface OrderItem {
   color: string;
   image: string;
 }
-
 interface Order {
   id: string;
   order_number: string;
@@ -31,9 +29,10 @@ interface Order {
   status: string;
   created_at: string;
 }
-
 const OrderConfirmation = () => {
-  const { orderId } = useParams();
+  const {
+    orderId
+  } = useParams();
   const location = useLocation();
   const [order, setOrder] = useState<Order | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,7 +40,6 @@ const OrderConfirmation = () => {
   // Get data from navigation state if available
   const orderFromState = location.state?.orderData;
   const orderNumberFromState = location.state?.orderNumber;
-
   useEffect(() => {
     // Confetti animation
     const createConfetti = () => {
@@ -54,9 +52,7 @@ const OrderConfirmation = () => {
         confetti.style.top = '-20px';
         confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
         confetti.style.animation = `confettiFall ${Math.random() * 4 + 3}s linear forwards`;
-        
         document.body.appendChild(confetti);
-        
         setTimeout(() => {
           confetti.remove();
         }, 7000);
@@ -78,31 +74,25 @@ const OrderConfirmation = () => {
       }
     `;
     document.head.appendChild(style);
-    
     createConfetti();
-
     return () => {
       if (document.head.contains(style)) {
         document.head.removeChild(style);
       }
     };
   }, []);
-
   useEffect(() => {
     const fetchOrder = async () => {
       if (!orderId) return;
-
       try {
-        const { data, error } = await supabase
-          .from('orders')
-          .select('*')
-          .eq('id', orderId)
-          .single();
-
+        const {
+          data,
+          error
+        } = await supabase.from('orders').select('*').eq('id', orderId).single();
         if (error) throw error;
         setOrder({
           ...data,
-          items: (data.items as unknown) as OrderItem[]
+          items: data.items as unknown as OrderItem[]
         } as Order);
       } catch (error) {
         console.error('Error fetching order:', error);
@@ -110,7 +100,6 @@ const OrderConfirmation = () => {
         setIsLoading(false);
       }
     };
-
     if (orderFromState && orderNumberFromState) {
       // Use data from state if available (immediate after order)
       setOrder({
@@ -124,21 +113,18 @@ const OrderConfirmation = () => {
       fetchOrder();
     }
   }, [orderId, orderFromState, orderNumberFromState]);
-
   const getEstimatedDelivery = () => {
     const deliveryDate = new Date();
     deliveryDate.setDate(deliveryDate.getDate() + 5); // 5 days from now
-    return deliveryDate.toLocaleDateString('en-US', { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return deliveryDate.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   };
-
   if (isLoading) {
-    return (
-      <Layout>
+    return <Layout>
         <div className="container mx-auto px-4 py-16">
           <div className="animate-pulse max-w-2xl mx-auto">
             <div className="h-8 bg-muted rounded w-1/2 mx-auto mb-8"></div>
@@ -148,13 +134,10 @@ const OrderConfirmation = () => {
             </div>
           </div>
         </div>
-      </Layout>
-    );
+      </Layout>;
   }
-
   if (!order) {
-    return (
-      <Layout>
+    return <Layout>
         <div className="container mx-auto px-4 py-16">
           <div className="text-center space-y-6">
             <h1 className="text-3xl font-bold text-foreground">Order not found</h1>
@@ -164,12 +147,9 @@ const OrderConfirmation = () => {
             </Link>
           </div>
         </div>
-      </Layout>
-    );
+      </Layout>;
   }
-
-  return (
-    <Layout>
+  return <Layout>
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Success Header */}
@@ -177,12 +157,12 @@ const OrderConfirmation = () => {
             <div className="flex justify-center">
               <div className="relative">
                 <CheckCircle className="h-24 w-24 text-success" />
-                <PartyPopper className="absolute -top-2 -right-2 h-8 w-8 text-primary" />
+                
               </div>
             </div>
             
             <div className="space-y-2">
-              <h1 className="text-4xl font-bold text-foreground">Order Confirmed! 🎉</h1>
+              <h1 className="text-foreground text-3xl font-extrabold text-center">ORDER CONFIRMED </h1>
               <p className="text-xl text-success font-semibold">
                 Thank you for your purchase, {order.customer_name}!
               </p>
@@ -205,13 +185,8 @@ const OrderConfirmation = () => {
               <div className="product-card p-6">
                 <h2 className="text-xl font-bold text-foreground mb-4">Order Items</h2>
                 <div className="space-y-4">
-                  {order.items.map((item, index) => (
-                    <div key={index} className="flex items-start space-x-4">
-                      <img
-                        src={item.image || "/api/placeholder/80/80"}
-                        alt={item.product_name}
-                        className="w-16 h-16 object-cover rounded-lg"
-                      />
+                  {order.items.map((item, index) => <div key={index} className="flex items-start space-x-4">
+                      <img src={item.image || "/api/placeholder/80/80"} alt={item.product_name} className="w-16 h-16 object-cover rounded-lg" />
                       <div className="flex-grow">
                         <h4 className="font-semibold text-foreground">{item.product_name}</h4>
                         <p className="text-sm text-muted-foreground">{item.brand}</p>
@@ -222,8 +197,7 @@ const OrderConfirmation = () => {
                           ₹{(item.price * item.quantity).toFixed(2)}
                         </p>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
 
@@ -324,8 +298,6 @@ const OrderConfirmation = () => {
           </div>
         </div>
       </div>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default OrderConfirmation;
