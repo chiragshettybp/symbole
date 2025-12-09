@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -26,6 +26,8 @@ interface CartContextType {
   items: CartItem[];
   isLoading: boolean;
   cartCount: number;
+  isCartOpen: boolean;
+  setIsCartOpen: (open: boolean) => void;
   addToCart: (productId: string, size: string, color?: string, quantity?: number) => Promise<void>;
   removeFromCart: (itemId: string) => Promise<void>;
   updateQuantity: (itemId: string, quantity: number) => Promise<void>;
@@ -58,6 +60,7 @@ const getSessionId = (): string => {
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const { toast } = useToast();
   const sessionId = getSessionId();
 
@@ -129,6 +132,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
           description: "Product has been added to your cart.",
         });
       }
+      // Auto-open cart sidebar after adding
+      setIsCartOpen(true);
     } catch (error) {
       console.error('Error adding to cart:', error);
       toast({
@@ -223,6 +228,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     items,
     isLoading,
     cartCount,
+    isCartOpen,
+    setIsCartOpen,
     addToCart,
     removeFromCart,
     updateQuantity,
