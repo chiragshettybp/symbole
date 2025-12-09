@@ -30,7 +30,7 @@ declare global {
 }
 
 const Checkout = () => {
-  const { items, getSubTotal, getTax, getCartTotal, clearCart } = useCart();
+  const { items, getSubTotal, getCartTotal, clearCart } = useCart();
   const { toast } = useToast();
   const navigate = useNavigate();
   
@@ -149,8 +149,9 @@ const Checkout = () => {
         image: item.product?.images[0]
       })),
       subtotal: getSubTotal(),
-      tax: getTax(),
-      total: getCartTotal(),
+      tax: 0,
+      shipping_cost: paymentMethod === 'cod' ? 49 : 0,
+      total: getCartTotal(paymentMethod),
       payment_method: paymentMethod,
       status: paymentStatus === 'paid' ? 'paid' : 'pending',
       checkout_initiated_at: checkoutInitiatedAt,
@@ -175,10 +176,10 @@ const Checkout = () => {
     setIsPlacingOrder(true);
 
     try {
-      const totalAmount = Math.round(getCartTotal() * 100); // Convert to paise
+      const totalAmount = Math.round(getCartTotal('prepaid') * 100); // Convert to paise
       
       const options = {
-        key: 'rzp_test_placeholder', // Will be replaced with actual key
+        key: 'rzp_live_RpOxAXNArV8M8q',
         amount: totalAmount,
         currency: 'INR',
         name: 'Ordify',
@@ -191,7 +192,7 @@ const Checkout = () => {
             // Create payment record
             await supabase.from('payments').insert({
               order_id: order.id,
-              amount: getCartTotal(),
+              amount: getCartTotal('prepaid'),
               method: 'razorpay',
               status: 'Paid',
               txn_ref: response.razorpay_payment_id
@@ -510,13 +511,15 @@ const Checkout = () => {
                   <span className="text-muted-foreground">Subtotal</span>
                   <span className="text-foreground">₹{getSubTotal().toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Tax</span>
-                  <span className="text-foreground">₹{getTax().toFixed(2)}</span>
-                </div>
+                {paymentMethod === 'cod' && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">COD Charges</span>
+                    <span className="text-foreground">₹49.00</span>
+                  </div>
+                )}
                 <div className="border-t border-border pt-2 flex justify-between font-semibold">
                   <span className="text-foreground">Total</span>
-                  <span className="text-foreground">₹{getCartTotal().toFixed(2)}</span>
+                  <span className="text-foreground">₹{getCartTotal(paymentMethod).toFixed(2)}</span>
                 </div>
               </div>
 

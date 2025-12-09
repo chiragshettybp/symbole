@@ -32,7 +32,7 @@ interface CartContextType {
   removeFromCart: (itemId: string) => Promise<void>;
   updateQuantity: (itemId: string, quantity: number) => Promise<void>;
   clearCart: () => Promise<void>;
-  getCartTotal: () => number;
+  getCartTotal: (paymentMethod?: 'cod' | 'prepaid') => number;
   getSubTotal: () => number;
   getTax: () => number;
 }
@@ -215,11 +215,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const getTax = (): number => {
-    return getSubTotal() * 0.08; // 8% tax
+    return 0; // No tax
   };
 
-  const getCartTotal = (): number => {
-    return getSubTotal() + getTax();
+  const getCartTotal = (paymentMethod: 'cod' | 'prepaid' = 'cod'): number => {
+    const codCharge = paymentMethod === 'cod' ? 49 : 0;
+    return getSubTotal() + codCharge;
   };
 
   const cartCount = items.reduce((count, item) => count + item.quantity, 0);
