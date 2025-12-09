@@ -66,7 +66,7 @@ const Header = () => {
         {isMenuOpen && <div className="md:hidden border-t border-border py-4">
             <nav className="flex flex-col space-y-4">
               <Link to="/" className="text-sm font-medium text-foreground">All</Link>
-              <Link to="/jackets" className="text-sm font-medium text-muted-foreground">Jackets</Link>
+              
               <Link to="/new-arrivals" className="text-sm font-medium text-muted-foreground">New Arrivals</Link>
               <Link to="/track-order" className="text-sm font-medium text-muted-foreground">Track Order</Link>
             </nav>
