@@ -1,4 +1,4 @@
-import { Search, ShoppingCart, Menu } from "lucide-react";
+import { Search, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useCart } from "@/contexts/CartContext";
 import CartSidebar from "@/components/cart/CartSidebar";
 import logoLight from "@/assets/logo-light.png";
+import cartIcon from "@/assets/cart-icon.svg";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const {
@@ -48,7 +49,7 @@ const Header = () => {
             
             <CartSidebar>
               <Button variant="ghost" size="icon" className="relative">
-                <ShoppingCart className="h-5 w-5" />
+                <img src={cartIcon} alt="Cart" className="h-5 w-5" />
                 {cartCount > 0 && <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
                     {cartCount}
                   </span>}
