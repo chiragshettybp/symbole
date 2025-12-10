@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Check, Shield, BadgeCheck, Lock } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { useCart } from "@/contexts/CartContext";
 import { ProductReviews } from "@/components/reviews/ProductReviews";
@@ -226,6 +226,12 @@ const ProductDetail = () => {
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Buy Now for</p>
                   <p className="text-2xl sm:text-3xl font-bold text-foreground">₹{product.price}</p>
+                  {/* Section 1 - Regular Price Strikethrough */}
+                  {product.original_price && product.original_price > product.price && (
+                    <p className="text-sm text-[#6B7280] mt-1">
+                      Regular Price: <span className="line-through">₹{product.original_price}</span>
+                    </p>
+                  )}
                 </div>
                 <div className="flex items-center space-x-2 text-primary">
                   <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-primary flex items-center justify-center">
@@ -256,6 +262,44 @@ const ProductDetail = () => {
                 <button onClick={() => setShowSizeChart(true)} className="text-primary hover:underline">
                   View Size Chart
                 </button>
+              </div>
+            </div>
+
+            {/* Section 2 - Feature Highlights Box */}
+            <div className="bg-white dark:bg-card border border-[#E5E7EB] dark:border-border rounded-xl p-4 sm:p-5 space-y-3">
+              <h3 className="font-semibold text-foreground text-sm sm:text-base flex items-center gap-2">
+                <Check className="w-4 h-4 text-green-600" />
+                Why You'll Love This Tee
+              </h3>
+              <div className="space-y-2">
+                {[
+                  "Super-soft Premium Cotton",
+                  "Perfect Regular Fit",
+                  "Fade-Resistant Print",
+                  "7-Day Hassle-Free Size Exchange",
+                  "Sweat-Friendly Fabric"
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    <span>{feature}</span>
+                  </div>
+                ))}
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Lock className="w-4 h-4 text-green-600 flex-shrink-0" />
+                  <span>Secure Checkout</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <BadgeCheck className="w-4 h-4 text-green-600 flex-shrink-0" />
+                  <span>100% Money-Back Guarantee</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Section 3 - Trust Badge Box */}
+            <div className="bg-[#F9FAFB] dark:bg-muted rounded-lg py-3 px-4 text-center">
+              <div className="flex items-center justify-center gap-2 text-sm font-medium text-foreground">
+                <Check className="w-4 h-4 text-green-600" />
+                <span>COD Available | Pay Only After Delivery</span>
               </div>
             </div>
 
