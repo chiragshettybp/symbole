@@ -296,10 +296,27 @@ const ProductDetail = () => {
             </div>
 
             {/* Section 3 - Trust Badge Box */}
-            <div className="bg-[#F9FAFB] dark:bg-muted rounded-lg py-3 px-4 text-center">
-              <div className="flex items-center justify-center gap-2 text-sm font-medium text-foreground">
-                <Check className="w-4 h-4 text-green-600" />
-                <span>COD Available | Pay Only After Delivery</span>
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border border-green-200 dark:border-green-800/50 rounded-xl p-4">
+              <div className="flex items-center justify-center gap-3 sm:gap-6 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
+                    <Check className="w-4 h-4 text-green-600" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-xs font-semibold text-green-700 dark:text-green-400">COD Available</p>
+                    <p className="text-[10px] text-green-600/80 dark:text-green-500/80">Pay on Delivery</p>
+                  </div>
+                </div>
+                <div className="hidden sm:block w-px h-8 bg-green-200 dark:bg-green-700/50"></div>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
+                    <Shield className="w-4 h-4 text-green-600" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-xs font-semibold text-green-700 dark:text-green-400">100% Secure</p>
+                    <p className="text-[10px] text-green-600/80 dark:text-green-500/80">Safe Payments</p>
+                  </div>
+                </div>
               </div>
             </div>
 
