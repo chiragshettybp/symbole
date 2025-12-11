@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Search, Home, Shirt, Sparkles, Tag, Package, HelpCircle, Truck, FileText, Shield, X } from "lucide-react";
+import { Search, Home, Sparkles, Tag, Package, HelpCircle, Truck, FileText, Shield, X, RotateCcw } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +18,6 @@ import {
 
 const menuItems = [
   { title: "Home", url: "/", icon: Home },
-  { title: "Jackets", url: "/jackets", icon: Shirt },
   { title: "New Arrivals", url: "/new-arrivals", icon: Sparkles },
   { title: "Sale", url: "/sale", icon: Tag },
 ];
@@ -30,6 +29,8 @@ const supportItems = [
 ];
 
 const legalItems = [
+  { title: "Refund & Return", url: "/refund-return", icon: RotateCcw },
+  { title: "Shipping Policy", url: "/shipping-policy", icon: Truck },
   { title: "Terms & Conditions", url: "/terms", icon: FileText },
   { title: "Privacy Policy", url: "/privacy", icon: Shield },
 ];
