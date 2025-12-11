@@ -227,11 +227,9 @@ const ProductDetail = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Buy Now for</p>
                   <p className="text-2xl sm:text-3xl font-bold text-foreground">₹{product.price}</p>
                   {/* Section 1 - Regular Price Strikethrough */}
-                  {product.original_price && product.original_price > product.price && (
-                    <p className="text-sm text-[#6B7280] mt-1">
+                  {product.original_price && product.original_price > product.price && <p className="text-sm text-[#6B7280] mt-1">
                       Regular Price: <span className="line-through">₹{product.original_price}</span>
-                    </p>
-                  )}
+                    </p>}
                 </div>
                 <div className="flex items-center space-x-2 text-primary">
                   <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-primary flex items-center justify-center">
@@ -272,18 +270,10 @@ const ProductDetail = () => {
                 Why You'll Love This Tee
               </h3>
               <div className="space-y-2">
-                {[
-                  "Super-soft Premium Cotton",
-                  "Perfect Regular Fit",
-                  "Fade-Resistant Print",
-                  "7-Day Hassle-Free Size Exchange",
-                  "Sweat-Friendly Fabric"
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+                {["Super-soft Premium Cotton", "Perfect Regular Fit", "Fade-Resistant Print", "7-Day Hassle-Free Size Exchange", "Sweat-Friendly Fabric"].map((feature, index) => <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
                     <span>{feature}</span>
-                  </div>
-                ))}
+                  </div>)}
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Lock className="w-4 h-4 text-green-600 flex-shrink-0" />
                   <span>Secure Checkout</span>
@@ -296,7 +286,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Section 3 - Trust Badge Box */}
-            <div className="bg-green-500 border border-green-600 rounded-xl p-4">
+            <div className="border rounded-xl p-4 bg-[#076e2d] border-[#20ae54]">
               <div className="flex items-center justify-center gap-3 sm:gap-6 flex-wrap">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
@@ -442,20 +432,35 @@ const ProductDetail = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {[
-                      { size: 'XS', chest: '40', length: '27' },
-                      { size: 'S', chest: '42', length: '28' },
-                      { size: 'M', chest: '44', length: '29' },
-                      { size: 'L', chest: '46', length: '30' },
-                      { size: 'XL', chest: '48', length: '31' },
-                      { size: '2XL', chest: '50', length: '32' },
-                    ].map((row, index) => (
-                      <tr key={index} className="border-b border-foreground last:border-b-0">
+                    {[{
+                  size: 'XS',
+                  chest: '40',
+                  length: '27'
+                }, {
+                  size: 'S',
+                  chest: '42',
+                  length: '28'
+                }, {
+                  size: 'M',
+                  chest: '44',
+                  length: '29'
+                }, {
+                  size: 'L',
+                  chest: '46',
+                  length: '30'
+                }, {
+                  size: 'XL',
+                  chest: '48',
+                  length: '31'
+                }, {
+                  size: '2XL',
+                  chest: '50',
+                  length: '32'
+                }].map((row, index) => <tr key={index} className="border-b border-foreground last:border-b-0">
                         <td className="py-3 px-6 text-center font-semibold text-foreground border-r border-foreground">{row.size}</td>
                         <td className="py-3 px-6 text-center text-foreground border-r border-foreground">{row.chest}</td>
                         <td className="py-3 px-6 text-center text-foreground">{row.length}</td>
-                      </tr>
-                    ))}
+                      </tr>)}
                   </tbody>
                 </table>
               </div>
