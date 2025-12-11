@@ -12,6 +12,10 @@ const menuItems = [{
   url: "/admin/analytics",
   icon: BarChart3
 }, {
+  title: "E-commerce",
+  url: "/admin/ecommerce-analytics",
+  icon: ShoppingBag
+}, {
   title: "Orders",
   url: "/admin/orders",
   icon: Package
