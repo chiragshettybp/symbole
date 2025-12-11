@@ -329,134 +329,134 @@ const AdminDashboard = () => {
         <div className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Total Revenue - Blue */}
-            <Card className="bg-black border-gray-700">
+            <Card className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-blue-400">Total Revenue</CardTitle>
-                <DollarSign className="h-4 w-4 text-blue-400" />
+                <CardTitle className="text-sm font-medium text-blue-600">Total Revenue</CardTitle>
+                <DollarSign className="h-4 w-4 text-blue-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">
+                <div className="text-2xl font-bold text-foreground">
                   ₹{totalRevenue.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                 </div>
-                <p className="text-xs text-gray-400">sum of paid payments</p>
+                <p className="text-xs text-muted-foreground">sum of paid payments</p>
               </CardContent>
             </Card>
 
             {/* Net Revenue - Green */}
-            <Card className="bg-black border-gray-700">
+            <Card className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-green-400">Net Revenue</CardTitle>
-                <TrendingUp className="h-4 w-4 text-green-400" />
+                <CardTitle className="text-sm font-medium text-green-600">Net Revenue</CardTitle>
+                <TrendingUp className="h-4 w-4 text-green-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">
+                <div className="text-2xl font-bold text-foreground">
                   ₹{netRevenue.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                 </div>
-                <p className="text-xs text-gray-400">total revenue - refunds</p>
+                <p className="text-xs text-muted-foreground">total revenue - refunds</p>
               </CardContent>
             </Card>
 
             {/* Average Order Value - Purple */}
-            <Card className="bg-black border-gray-700">
+            <Card className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-purple-400">Average Order Value</CardTitle>
-                <TrendingUp className="h-4 w-4 text-purple-400" />
+                <CardTitle className="text-sm font-medium text-purple-600">Average Order Value</CardTitle>
+                <TrendingUp className="h-4 w-4 text-purple-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">
+                <div className="text-2xl font-bold text-foreground">
                   ₹{avgOrderValue.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                 </div>
-                <p className="text-xs text-gray-400">net revenue ÷ delivered orders</p>
+                <p className="text-xs text-muted-foreground">net revenue ÷ delivered orders</p>
               </CardContent>
             </Card>
 
             {/* Refunded Amount - Red */}
-            <Card className="bg-black border-gray-700">
+            <Card className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-red-400">Refunded Amount</CardTitle>
-                <AlertTriangle className="h-4 w-4 text-red-400" />
+                <CardTitle className="text-sm font-medium text-red-600">Refunded Amount</CardTitle>
+                <AlertTriangle className="h-4 w-4 text-red-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">
+                <div className="text-2xl font-bold text-foreground">
                   ₹{refundedAmount.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
                 </div>
-                <p className="text-xs text-gray-400">sum of refund payments</p>
+                <p className="text-xs text-muted-foreground">sum of refund payments</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Orders Analytics Cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Card className="bg-black border-gray-700 cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/admin/orders')}>
+            <Card className="bg-card border-border cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/admin/orders')}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-300">Total Orders</CardTitle>
-                <Package className="h-4 w-4 text-gray-400" />
+                <CardTitle className="text-sm font-medium text-foreground">Total Orders</CardTitle>
+                <Package className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">{liveStats.totalOrders}</div>
-                <p className="text-xs text-gray-400">all time</p>
+                <div className="text-2xl font-bold text-foreground">{liveStats.totalOrders}</div>
+                <p className="text-xs text-muted-foreground">all time</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-black border-gray-700 cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/admin/orders')}>
+            <Card className="bg-card border-border cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/admin/orders')}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-300">Delivered</CardTitle>
-                <CheckCircle2 className="h-4 w-4 text-green-400" />
+                <CardTitle className="text-sm font-medium text-foreground">Delivered</CardTitle>
+                <CheckCircle2 className="h-4 w-4 text-green-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-green-400">{liveStats.deliveredOrders}</div>
-                <p className="text-xs text-gray-400">
+                <div className="text-2xl font-bold text-green-600">{liveStats.deliveredOrders}</div>
+                <p className="text-xs text-muted-foreground">
                   {liveStats.totalOrders > 0 ? Math.round((liveStats.deliveredOrders / liveStats.totalOrders) * 100) : 0}% conversion
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-black border-gray-700 cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/admin/orders')}>
+            <Card className="bg-card border-border cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/admin/orders')}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-300">Cancelled</CardTitle>
-                <XCircle className="h-4 w-4 text-red-400" />
+                <CardTitle className="text-sm font-medium text-foreground">Cancelled</CardTitle>
+                <XCircle className="h-4 w-4 text-red-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-red-400">{liveStats.cancelledOrders}</div>
-                <p className="text-xs text-gray-400">cancelled orders</p>
+                <div className="text-2xl font-bold text-red-600">{liveStats.cancelledOrders}</div>
+                <p className="text-xs text-muted-foreground">cancelled orders</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-black border-gray-700 cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/admin/orders')}>
+            <Card className="bg-card border-border cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/admin/orders')}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-300">Pending</CardTitle>
-                <Clock className="h-4 w-4 text-orange-400" />
+                <CardTitle className="text-sm font-medium text-foreground">Pending</CardTitle>
+                <Clock className="h-4 w-4 text-orange-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-orange-400">{liveStats.pendingOrders}</div>
-                <p className="text-xs text-gray-400">awaiting processing</p>
+                <div className="text-2xl font-bold text-orange-600">{liveStats.pendingOrders}</div>
+                <p className="text-xs text-muted-foreground">awaiting processing</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Additional Analytics Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="bg-black border-gray-700">
+            <Card className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-cyan-400">Active Users</CardTitle>
-                <Users className="h-4 w-4 text-cyan-400" />
+                <CardTitle className="text-sm font-medium text-cyan-600">Active Users</CardTitle>
+                <Users className="h-4 w-4 text-cyan-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">{liveStats.activeUsers}</div>
-                <p className="text-xs text-gray-400">last 30 days</p>
+                <div className="text-2xl font-bold text-foreground">{liveStats.activeUsers}</div>
+                <p className="text-xs text-muted-foreground">last 30 days</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-black border-gray-700">
+            <Card className="bg-card border-border">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-emerald-400">Order Conversion Rate</CardTitle>
-                <TrendingUp className="h-4 w-4 text-emerald-400" />
+                <CardTitle className="text-sm font-medium text-emerald-600">Order Conversion Rate</CardTitle>
+                <TrendingUp className="h-4 w-4 text-emerald-600" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">
+                <div className="text-2xl font-bold text-foreground">
                   {liveStats.totalOrders > 0 ? Math.round((liveStats.deliveredOrders / liveStats.totalOrders) * 100) : 0}%
                 </div>
-                <p className="text-xs text-gray-400">delivered / total orders</p>
+                <p className="text-xs text-muted-foreground">delivered / total orders</p>
               </CardContent>
             </Card>
           </div>
