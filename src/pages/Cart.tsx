@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Minus, Plus, Trash2, ShoppingBag, PartyPopper } from 'lucide-react';
+import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
+
 const Cart = () => {
   const {
     items,
@@ -15,47 +15,6 @@ const Cart = () => {
     getTax,
     getCartTotal
   } = useCart();
-
-  // Celebration animation on mount
-  useEffect(() => {
-    // Create confetti effect
-    const createConfetti = () => {
-      const colors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6'];
-      for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.className = 'fixed w-2 h-2 pointer-events-none z-50';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.top = '-10px';
-        confetti.style.borderRadius = '50%';
-        confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
-        document.body.appendChild(confetti);
-        setTimeout(() => {
-          confetti.remove();
-        }, 5000);
-      }
-    };
-
-    // Add CSS animation for falling confetti
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fall {
-        0% {
-          transform: translateY(0) rotate(0deg);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(100vh) rotate(360deg);
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-    createConfetti();
-    return () => {
-      document.head.removeChild(style);
-    };
-  }, []);
   if (isLoading) {
     return <Layout>
         <div className="container mx-auto px-4 py-8">
