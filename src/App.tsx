@@ -24,6 +24,7 @@ import AdminSettings from "./pages/AdminSettings";
 import AdminAudit from "./pages/AdminAudit";
 import AdminAnalytics from "./pages/AdminAnalytics";
 import AdminPageAnalytics from "./pages/AdminPageAnalytics";
+import AdminEcommerceAnalytics from "./pages/AdminEcommerceAnalytics";
 import NotFound from "./pages/NotFound";
 import NewArrivals from "./pages/NewArrivals";
 import Sale from "./pages/Sale";
@@ -79,6 +80,7 @@ const App = () => (
               <Route path="/admin/audit" element={<ProtectedAdminRoute><AdminAudit /></ProtectedAdminRoute>} />
               <Route path="/admin/analytics" element={<ProtectedAdminRoute><AdminAnalytics /></ProtectedAdminRoute>} />
               <Route path="/admin/analytics/page/:slug" element={<ProtectedAdminRoute><AdminPageAnalytics /></ProtectedAdminRoute>} />
+              <Route path="/admin/ecommerce-analytics" element={<ProtectedAdminRoute><AdminEcommerceAnalytics /></ProtectedAdminRoute>} />
               
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -119,6 +119,30 @@ export type Database = {
         }
         Relationships: []
       }
+      cart_abandonment_reasons: {
+        Row: {
+          cart_id: string | null
+          created_at: string
+          id: string
+          reason: string
+          session_id: string
+        }
+        Insert: {
+          cart_id?: string | null
+          created_at?: string
+          id?: string
+          reason: string
+          session_id: string
+        }
+        Update: {
+          cart_id?: string | null
+          created_at?: string
+          id?: string
+          reason?: string
+          session_id?: string
+        }
+        Relationships: []
+      }
       cart_items: {
         Row: {
           color: string
@@ -159,6 +183,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      checkout_funnel: {
+        Row: {
+          completed: boolean | null
+          created_at: string
+          dropped_off: boolean | null
+          id: string
+          session_id: string
+          step: string
+          time_spent: number | null
+        }
+        Insert: {
+          completed?: boolean | null
+          created_at?: string
+          dropped_off?: boolean | null
+          id?: string
+          session_id: string
+          step: string
+          time_spent?: number | null
+        }
+        Update: {
+          completed?: boolean | null
+          created_at?: string
+          dropped_off?: boolean | null
+          id?: string
+          session_id?: string
+          step?: string
+          time_spent?: number | null
+        }
+        Relationships: []
       }
       daily_analytics_summary: {
         Row: {
@@ -407,6 +461,41 @@ export type Database = {
           },
         ]
       }
+      product_fit_feedback: {
+        Row: {
+          created_at: string
+          fit_rating: string
+          id: string
+          product_id: string | null
+          session_id: string | null
+          size_purchased: string | null
+        }
+        Insert: {
+          created_at?: string
+          fit_rating: string
+          id?: string
+          product_id?: string | null
+          session_id?: string | null
+          size_purchased?: string | null
+        }
+        Update: {
+          created_at?: string
+          fit_rating?: string
+          id?: string
+          product_id?: string | null
+          session_id?: string | null
+          size_purchased?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_fit_feedback_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       product_variants: {
         Row: {
           created_at: string
@@ -504,6 +593,44 @@ export type Database = {
           visible?: boolean
         }
         Relationships: []
+      }
+      recently_viewed: {
+        Row: {
+          created_at: string
+          id: string
+          last_viewed_at: string
+          product_id: string | null
+          session_id: string
+          total_time_spent: number | null
+          view_count: number | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_viewed_at?: string
+          product_id?: string | null
+          session_id: string
+          total_time_spent?: number | null
+          view_count?: number | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_viewed_at?: string
+          product_id?: string | null
+          session_id?: string
+          total_time_spent?: number | null
+          view_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recently_viewed_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       refunds: {
         Row: {
@@ -739,6 +866,41 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      wishlist: {
+        Row: {
+          converted_at: string | null
+          converted_to_cart: boolean | null
+          created_at: string
+          id: string
+          product_id: string | null
+          session_id: string
+        }
+        Insert: {
+          converted_at?: string | null
+          converted_to_cart?: boolean | null
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          session_id: string
+        }
+        Update: {
+          converted_at?: string | null
+          converted_to_cart?: boolean | null
+          created_at?: string
+          id?: string
+          product_id?: string | null
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wishlist_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
