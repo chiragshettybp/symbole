@@ -423,216 +423,47 @@ const ProductDetail = () => {
             </div>
             
             {/* Size Chart Content */}
-            <div className="p-6 space-y-8">
-              {/* Men's Shoes */}
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">MEN'S SHOES</h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b border-border">
-                        <th className="py-2 px-4 text-left bg-muted font-semibold">EU</th>
-                        <th className="py-2 px-4 text-left bg-muted font-semibold">US</th>
-                        <th className="py-2 px-4 text-left bg-muted font-semibold">Heel to toe</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {[{
-                    eu: '36',
-                    us: '4',
-                    heel: '22.5 cm'
-                  }, {
-                    eu: '37',
-                    us: '4.5',
-                    heel: '23 cm'
-                  }, {
-                    eu: '37.5',
-                    us: '5',
-                    heel: '23.5 cm'
-                  }, {
-                    eu: '38',
-                    us: '5.5',
-                    heel: '23.7 cm'
-                  }, {
-                    eu: '38.5',
-                    us: '5.5',
-                    heel: '24.2 cm'
-                  }, {
-                    eu: '39',
-                    us: '6',
-                    heel: '24.5 cm'
-                  }, {
-                    eu: '39.5',
-                    us: '6',
-                    heel: '24.7 cm'
-                  }, {
-                    eu: '40',
-                    us: '6.5',
-                    heel: '25.2 cm'
-                  }, {
-                    eu: '40.5',
-                    us: '7',
-                    heel: '25.5 cm'
-                  }, {
-                    eu: '41',
-                    us: '7.5',
-                    heel: '25.8 cm'
-                  }, {
-                    eu: '41.5',
-                    us: '8',
-                    heel: '26.3 cm'
-                  }, {
-                    eu: '42',
-                    us: '8.5',
-                    heel: '26.5 cm'
-                  }, {
-                    eu: '42.5',
-                    us: '9',
-                    heel: '27 cm'
-                  }, {
-                    eu: '43',
-                    us: '9',
-                    heel: '27.3 cm'
-                  }, {
-                    eu: '43.5',
-                    us: '9.5',
-                    heel: '27.5 cm'
-                  }, {
-                    eu: '44',
-                    us: '10',
-                    heel: '28 cm'
-                  }, {
-                    eu: '44.5',
-                    us: '10',
-                    heel: '28.3 cm'
-                  }, {
-                    eu: '45',
-                    us: '10.5',
-                    heel: '28.6 cm'
-                  }, {
-                    eu: '45.5',
-                    us: '11',
-                    heel: '29 cm'
-                  }, {
-                    eu: '46',
-                    us: '11.5',
-                    heel: '29.3 cm'
-                  }, {
-                    eu: '46.5',
-                    us: '11.5',
-                    heel: '29.6 cm'
-                  }, {
-                    eu: '47',
-                    us: '12',
-                    heel: '30 cm'
-                  }, {
-                    eu: '48',
-                    us: '13',
-                    heel: '30.5 cm'
-                  }, {
-                    eu: '49',
-                    us: '13',
-                    heel: '31 cm'
-                  }, {
-                    eu: '50',
-                    us: '14',
-                    heel: '31.5 cm'
-                  }].map((size, index) => <tr key={index} className={index % 2 === 0 ? 'bg-muted/30' : ''}>
-                          <td className="py-2 px-4 text-foreground">{size.eu}</td>
-                          <td className="py-2 px-4 text-foreground">{size.us}</td>
-                          <td className="py-2 px-4 text-foreground">{size.heel}</td>
-                        </tr>)}
-                    </tbody>
-                  </table>
+            <div className="p-6 space-y-4">
+              {/* Size Chart Title */}
+              <div className="flex justify-center mb-4">
+                <div className="border-2 border-foreground rounded-full px-6 py-2">
+                  <span className="font-bold text-foreground tracking-wide">SIZE CHART</span>
                 </div>
               </div>
-
-              {/* Women's Shoes */}
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">WOMEN'S SHOES</h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b border-border">
-                        <th className="py-2 px-4 text-left bg-muted font-semibold">EU</th>
-                        <th className="py-2 px-4 text-left bg-muted font-semibold">US</th>
-                        <th className="py-2 px-4 text-left bg-muted font-semibold">Heel to toe</th>
+              
+              {/* Size Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm border border-foreground">
+                  <thead>
+                    <tr className="border-b-2 border-foreground">
+                      <th className="py-3 px-6 text-center font-bold text-foreground border-r border-foreground">SIZE</th>
+                      <th className="py-3 px-6 text-center font-bold text-foreground border-r border-foreground">CHEST</th>
+                      <th className="py-3 px-6 text-center font-bold text-foreground">LENGTH</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { size: 'XS', chest: '40', length: '27' },
+                      { size: 'S', chest: '42', length: '28' },
+                      { size: 'M', chest: '44', length: '29' },
+                      { size: 'L', chest: '46', length: '30' },
+                      { size: 'XL', chest: '48', length: '31' },
+                      { size: '2XL', chest: '50', length: '32' },
+                    ].map((row, index) => (
+                      <tr key={index} className="border-b border-foreground last:border-b-0">
+                        <td className="py-3 px-6 text-center font-semibold text-foreground border-r border-foreground">{row.size}</td>
+                        <td className="py-3 px-6 text-center text-foreground border-r border-foreground">{row.chest}</td>
+                        <td className="py-3 px-6 text-center text-foreground">{row.length}</td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {[{
-                    eu: '36',
-                    us: '5',
-                    heel: '22.5 cm'
-                  }, {
-                    eu: '37',
-                    us: '5.5',
-                    heel: '23 cm'
-                  }, {
-                    eu: '37.5',
-                    us: '6',
-                    heel: '23.5 cm'
-                  }, {
-                    eu: '38',
-                    us: '6.5',
-                    heel: '23.7 cm'
-                  }, {
-                    eu: '38.5',
-                    us: '7',
-                    heel: '24 cm'
-                  }, {
-                    eu: '39',
-                    us: '7.5',
-                    heel: '24.5 cm'
-                  }, {
-                    eu: '39.5',
-                    us: '7.5',
-                    heel: '24.7 cm'
-                  }, {
-                    eu: '40',
-                    us: '8',
-                    heel: '25.2 cm'
-                  }, {
-                    eu: '40.5',
-                    us: '8.5',
-                    heel: '25.5 cm'
-                  }, {
-                    eu: '41',
-                    us: '8.5',
-                    heel: '25.7 cm'
-                  }, {
-                    eu: '41.5',
-                    us: '9',
-                    heel: '26.2 cm'
-                  }, {
-                    eu: '42',
-                    us: '9.5',
-                    heel: '26.5 cm'
-                  }, {
-                    eu: '42.5',
-                    us: '10',
-                    heel: '26.8 cm'
-                  }, {
-                    eu: '43',
-                    us: '10.5',
-                    heel: '27.2 cm'
-                  }, {
-                    eu: '43.5',
-                    us: '11',
-                    heel: '27.5 cm'
-                  }, {
-                    eu: '44',
-                    us: '11',
-                    heel: '27.8 cm'
-                  }].map((size, index) => <tr key={index} className={index % 2 === 0 ? 'bg-muted/30' : ''}>
-                          <td className="py-2 px-4 text-foreground">{size.eu}</td>
-                          <td className="py-2 px-4 text-foreground">{size.us}</td>
-                          <td className="py-2 px-4 text-foreground">{size.heel}</td>
-                        </tr>)}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
+              
+              {/* Measurement Note */}
+              <p className="text-sm text-muted-foreground text-center italic">
+                *All measurements are in inches.
+              </p>
             </div>
           </div>
         </div>}
