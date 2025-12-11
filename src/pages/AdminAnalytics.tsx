@@ -14,9 +14,9 @@ import { AnalyticsKPICard } from '@/components/analytics/AnalyticsKPICard';
 import { 
   AnalyticsLineChart, 
   AnalyticsMultiLineChart,
-  AnalyticsBarChart, 
   AnalyticsPieChart 
 } from '@/components/analytics/AnalyticsChart';
+import { ClickablePagesList } from '@/components/analytics/ClickablePagesList';
 import { AnalyticsEventsTable } from '@/components/analytics/AnalyticsEventsTable';
 import { RealTimeActivityFeed } from '@/components/analytics/RealTimeActivityFeed';
 import { DateRangeFilter } from '@/components/analytics/DateRangeFilter';
@@ -167,25 +167,19 @@ const AdminAnalytics = () => {
           />
 
           {/* Top Landing Pages */}
-          <AnalyticsBarChart
+          <ClickablePagesList
             title="Top Landing Pages"
-            data={topLandingPages}
-            dataKey="visits"
-            nameKey="page"
-            fillColor="#3b82f6"
-            layout="vertical"
+            pages={topLandingPages}
             isLoading={isLoading}
+            color="#3b82f6"
           />
 
           {/* Top Exit Pages */}
-          <AnalyticsBarChart
+          <ClickablePagesList
             title="Top Exit Pages"
-            data={topExitPages}
-            dataKey="visits"
-            nameKey="page"
-            fillColor="#ef4444"
-            layout="vertical"
+            pages={topExitPages}
             isLoading={isLoading}
+            color="#ef4444"
           />
         </div>
 

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Product {
   id: string;
@@ -20,14 +21,58 @@ interface ProductCardProps {
   onAddToCart?: (productId: string) => void;
 }
 
+const getSessionId = (): string => {
+  let sessionId = sessionStorage.getItem('analytics_session_id');
+  if (!sessionId) {
+    sessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+    sessionStorage.setItem('analytics_session_id', sessionId);
+  }
+  return sessionId;
+};
+
+const trackProductClick = async (productId: string, productName: string, clickType: 'thumbnail' | 'add_to_cart') => {
+  try {
+    const sessionId = getSessionId();
+    await supabase.from('analytics_events').insert({
+      session_id: sessionId,
+      event_type: 'click',
+      page_url: window.location.pathname,
+      page_title: document.title,
+      click_target: clickType === 'thumbnail' ? 'product_thumbnail' : 'add_to_cart_button',
+      product_id: productId,
+      device_type: window.innerWidth < 768 ? 'mobile' : window.innerWidth < 1024 ? 'tablet' : 'desktop',
+      browser: navigator.userAgent.includes('Chrome') ? 'Chrome' : 
+               navigator.userAgent.includes('Safari') ? 'Safari' : 
+               navigator.userAgent.includes('Firefox') ? 'Firefox' : 'Other',
+      metadata: { product_name: productName }
+    });
+  } catch (error) {
+    console.error('Analytics tracking error:', error);
+  }
+};
+
 const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
   const discount = product.original_price 
     ? Math.round(((product.original_price - product.price) / product.original_price) * 100)
     : 0;
 
+  const handleThumbnailClick = () => {
+    trackProductClick(product.id, product.name, 'thumbnail');
+  };
+
+  const handleAddToCartClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    trackProductClick(product.id, product.name, 'add_to_cart');
+    onAddToCart?.(product.id);
+  };
+
   return (
     <div className="product-card group">
-      <Link to={`/product/${product.slug}`} className="block">
+      <Link 
+        to={`/product/${product.slug}`} 
+        className="block"
+        onClick={handleThumbnailClick}
+      >
         <div className="relative overflow-hidden rounded-t-lg aspect-square">
           <img
             src={
@@ -55,7 +100,7 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
       <div className="p-2.5 sm:p-4 space-y-2 sm:space-y-3">
         <div className="space-y-0.5 sm:space-y-1">
           <p className="text-xs sm:text-sm text-muted-foreground truncate">{product.brand}</p>
-          <Link to={`/product/${product.slug}`}>
+          <Link to={`/product/${product.slug}`} onClick={handleThumbnailClick}>
             <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 text-xs sm:text-sm md:text-base leading-tight">
               {product.name}
             </h3>
@@ -75,10 +120,7 @@ const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
           <Button
             size="icon"
             className="rounded-full bg-primary hover:bg-primary-hover h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0"
-            onClick={(e) => {
-              e.preventDefault();
-              onAddToCart?.(product.id);
-            }}
+            onClick={handleAddToCartClick}
           >
             <Plus className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </Button>
