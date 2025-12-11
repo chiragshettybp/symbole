@@ -318,14 +318,16 @@ export const useEcommerceAnalytics = (
       const steps = ['homepage', 'product', 'cart', 'shipping', 'payment', 'review', 'complete'];
       const funnelEventsData = funnelEvents || [];
       
-      const calculatedFunnel: FunnelStep[] = steps.map((step, index) => {
+      // Build funnel data step by step to avoid self-reference issue
+      const calculatedFunnel: FunnelStep[] = [];
+      steps.forEach((step, index) => {
         const stepEvents = funnelEventsData.filter(e => e.step === step);
         const users = stepEvents.length || Math.max(0, 100 - index * 15); // Fallback for empty data
         const prevUsers = index > 0 ? (calculatedFunnel[index - 1]?.users || users + 10) : users;
         const dropOff = Math.max(0, prevUsers - users);
         const conversionRate = prevUsers > 0 ? (users / prevUsers) * 100 : 100;
         
-        return { step, users, dropOff, conversionRate: Math.round(conversionRate) };
+        calculatedFunnel.push({ step, users, dropOff, conversionRate: Math.round(conversionRate) });
       });
 
       setFunnelData(calculatedFunnel);
