@@ -296,7 +296,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Section 3 - Trust Badge Box */}
-            <div className="bg-green-500 border border-green-600 rounded-xl p-4">
+            <div className="bg-emerald-600 border border-emerald-700 rounded-xl p-4">
               <div className="flex items-center justify-center gap-3 sm:gap-6 flex-wrap">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
