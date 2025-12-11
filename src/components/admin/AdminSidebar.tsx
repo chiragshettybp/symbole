@@ -1,12 +1,16 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
-import { LayoutDashboard, Package, CreditCard, Truck, ShoppingBag, Users, FileText, Settings, History, LogOut } from 'lucide-react';
+import { LayoutDashboard, Package, CreditCard, Truck, ShoppingBag, Users, FileText, Settings, History, LogOut, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAdmin } from '@/contexts/AdminContext';
 const menuItems = [{
   title: "Dashboard",
   url: "/admin",
   icon: LayoutDashboard
+}, {
+  title: "Analytics",
+  url: "/admin/analytics",
+  icon: BarChart3
 }, {
   title: "Orders",
   url: "/admin/orders",
