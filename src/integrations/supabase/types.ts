@@ -50,6 +50,75 @@ export type Database = {
         }
         Relationships: []
       }
+      analytics_events: {
+        Row: {
+          browser: string | null
+          city: string | null
+          click_target: string | null
+          country: string | null
+          created_at: string
+          device_type: string | null
+          event_type: string
+          id: string
+          is_bounce: boolean | null
+          metadata: Json | null
+          os: string | null
+          page_title: string | null
+          page_url: string
+          product_id: string | null
+          referrer: string | null
+          screen_height: number | null
+          screen_width: number | null
+          scroll_depth: number | null
+          session_duration: number | null
+          session_id: string
+        }
+        Insert: {
+          browser?: string | null
+          city?: string | null
+          click_target?: string | null
+          country?: string | null
+          created_at?: string
+          device_type?: string | null
+          event_type: string
+          id?: string
+          is_bounce?: boolean | null
+          metadata?: Json | null
+          os?: string | null
+          page_title?: string | null
+          page_url: string
+          product_id?: string | null
+          referrer?: string | null
+          screen_height?: number | null
+          screen_width?: number | null
+          scroll_depth?: number | null
+          session_duration?: number | null
+          session_id: string
+        }
+        Update: {
+          browser?: string | null
+          city?: string | null
+          click_target?: string | null
+          country?: string | null
+          created_at?: string
+          device_type?: string | null
+          event_type?: string
+          id?: string
+          is_bounce?: boolean | null
+          metadata?: Json | null
+          os?: string | null
+          page_title?: string | null
+          page_url?: string
+          product_id?: string | null
+          referrer?: string | null
+          screen_height?: number | null
+          screen_width?: number | null
+          scroll_depth?: number | null
+          session_duration?: number | null
+          session_id?: string
+        }
+        Relationships: []
+      }
       cart_items: {
         Row: {
           color: string
@@ -90,6 +159,63 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      daily_analytics_summary: {
+        Row: {
+          avg_scroll_depth: number | null
+          avg_session_duration: number | null
+          bounce_rate: number | null
+          created_at: string
+          date: string
+          desktop_visits: number | null
+          id: string
+          mobile_visits: number | null
+          product_click_rate: number | null
+          tablet_visits: number | null
+          top_browsers: Json | null
+          top_pages: Json | null
+          total_page_views: number | null
+          total_visits: number | null
+          unique_visitors: number | null
+          updated_at: string
+        }
+        Insert: {
+          avg_scroll_depth?: number | null
+          avg_session_duration?: number | null
+          bounce_rate?: number | null
+          created_at?: string
+          date: string
+          desktop_visits?: number | null
+          id?: string
+          mobile_visits?: number | null
+          product_click_rate?: number | null
+          tablet_visits?: number | null
+          top_browsers?: Json | null
+          top_pages?: Json | null
+          total_page_views?: number | null
+          total_visits?: number | null
+          unique_visitors?: number | null
+          updated_at?: string
+        }
+        Update: {
+          avg_scroll_depth?: number | null
+          avg_session_duration?: number | null
+          bounce_rate?: number | null
+          created_at?: string
+          date?: string
+          desktop_visits?: number | null
+          id?: string
+          mobile_visits?: number | null
+          product_click_rate?: number | null
+          tablet_visits?: number | null
+          top_browsers?: Json | null
+          top_pages?: Json | null
+          total_page_views?: number | null
+          total_visits?: number | null
+          unique_visitors?: number | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       order_items: {
         Row: {
