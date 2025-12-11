@@ -29,6 +29,8 @@ import Shipping from "./pages/Shipping";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import FAQPage from "./pages/FAQPage";
+import RefundReturn from "./pages/RefundReturn";
+import ShippingPolicy from "./pages/ShippingPolicy";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +62,8 @@ const App = () => (
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
+              <Route path="/refund-return" element={<RefundReturn />} />
+              <Route path="/shipping-policy" element={<ShippingPolicy />} />
               
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
