@@ -1,6 +1,7 @@
 import Layout from "@/components/layout/Layout";
 import TrendingSneakers from "@/components/products/TrendingSneakers";
 import HeroBanner from "@/components/layout/HeroBanner";
+import ValueProposition from "@/components/home/ValueProposition";
 import SEOHead from "@/components/seo/SEOHead";
 
 const Index = () => {
@@ -14,7 +15,10 @@ const Index = () => {
       {/* Hero Banner */}
       <HeroBanner />
 
-      {/* Trending Products */}
+      {/* Value Proposition */}
+      <ValueProposition />
+
+      {/* Product Collection */}
       <TrendingSneakers />
     </Layout>
   );
