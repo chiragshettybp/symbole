@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import { AdminProvider, useAdmin } from "@/contexts/AdminContext";
 import { ThemeProvider } from "next-themes";
+import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
@@ -43,53 +44,54 @@ const ProtectedAdminRoute = ({ children }: { children: React.ReactNode }) => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} forcedTheme="light">
-      <CartProvider>
-        <AdminProvider>
-          <TooltipProvider>
-            <Toaster />
-            <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/product/:slug" element={<ProductDetail />} />
-              <Route path="/jackets" element={<Index />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/order-success" element={<OrderSuccess />} />
-              <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
-              <Route path="/track-order" element={<TrackOrder />} />
-              <Route path="/new-arrivals" element={<NewArrivals />} />
-              <Route path="/sale" element={<Sale />} />
-              <Route path="/shipping" element={<Shipping />} />
-              <Route path="/faq" element={<FAQPage />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/refund-return" element={<RefundReturn />} />
-              <Route path="/shipping-policy" element={<ShippingPolicy />} />
-              
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/admin" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
-              <Route path="/admin/orders" element={<ProtectedAdminRoute><AdminOrders /></ProtectedAdminRoute>} />
-              <Route path="/admin/orders/:id" element={<ProtectedAdminRoute><AdminOrderDetail /></ProtectedAdminRoute>} />
-              <Route path="/admin/payments" element={<ProtectedAdminRoute><AdminPayments /></ProtectedAdminRoute>} />
-              <Route path="/admin/products" element={<ProtectedAdminRoute><AdminProducts /></ProtectedAdminRoute>} />
-              <Route path="/admin/shipments" element={<ProtectedAdminRoute><AdminShipments /></ProtectedAdminRoute>} />
-              <Route path="/admin/customers" element={<ProtectedAdminRoute><AdminCustomers /></ProtectedAdminRoute>} />
-              <Route path="/admin/settings" element={<ProtectedAdminRoute><AdminSettings /></ProtectedAdminRoute>} />
-              <Route path="/admin/audit" element={<ProtectedAdminRoute><AdminAudit /></ProtectedAdminRoute>} />
-              <Route path="/admin/analytics" element={<ProtectedAdminRoute><AdminAnalytics /></ProtectedAdminRoute>} />
-              <Route path="/admin/analytics/page/:slug" element={<ProtectedAdminRoute><AdminPageAnalytics /></ProtectedAdminRoute>} />
-              <Route path="/admin/ecommerce-analytics" element={<ProtectedAdminRoute><AdminEcommerceAnalytics /></ProtectedAdminRoute>} />
-              
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </AdminProvider>
-      </CartProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} forcedTheme="light">
+        <CartProvider>
+          <AdminProvider>
+            <TooltipProvider>
+              <Toaster />
+              <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/product/:slug" element={<ProductDetail />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/order-success" element={<OrderSuccess />} />
+                <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
+                <Route path="/track-order" element={<TrackOrder />} />
+                <Route path="/new-arrivals" element={<NewArrivals />} />
+                <Route path="/sale" element={<Sale />} />
+                <Route path="/shipping" element={<Shipping />} />
+                <Route path="/faq" element={<FAQPage />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/refund-return" element={<RefundReturn />} />
+                <Route path="/shipping-policy" element={<ShippingPolicy />} />
+                
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
+                <Route path="/admin/orders" element={<ProtectedAdminRoute><AdminOrders /></ProtectedAdminRoute>} />
+                <Route path="/admin/orders/:id" element={<ProtectedAdminRoute><AdminOrderDetail /></ProtectedAdminRoute>} />
+                <Route path="/admin/payments" element={<ProtectedAdminRoute><AdminPayments /></ProtectedAdminRoute>} />
+                <Route path="/admin/products" element={<ProtectedAdminRoute><AdminProducts /></ProtectedAdminRoute>} />
+                <Route path="/admin/shipments" element={<ProtectedAdminRoute><AdminShipments /></ProtectedAdminRoute>} />
+                <Route path="/admin/customers" element={<ProtectedAdminRoute><AdminCustomers /></ProtectedAdminRoute>} />
+                <Route path="/admin/settings" element={<ProtectedAdminRoute><AdminSettings /></ProtectedAdminRoute>} />
+                <Route path="/admin/audit" element={<ProtectedAdminRoute><AdminAudit /></ProtectedAdminRoute>} />
+                <Route path="/admin/analytics" element={<ProtectedAdminRoute><AdminAnalytics /></ProtectedAdminRoute>} />
+                <Route path="/admin/analytics/page/:slug" element={<ProtectedAdminRoute><AdminPageAnalytics /></ProtectedAdminRoute>} />
+                <Route path="/admin/ecommerce-analytics" element={<ProtectedAdminRoute><AdminEcommerceAnalytics /></ProtectedAdminRoute>} />
+                
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              </BrowserRouter>
+            </TooltipProvider>
+          </AdminProvider>
+        </CartProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;

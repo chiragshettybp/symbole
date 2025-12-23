@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { CheckCircle, Package, Truck, Clock, Search } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
 import { useToast } from '@/hooks/use-toast';
+import SEOHead from '@/components/seo/SEOHead';
 
 interface Order {
   id: string;
@@ -144,6 +145,11 @@ const TrackOrder = () => {
 
   return (
     <Layout>
+      <SEOHead 
+        title="Track Your Order"
+        description="Track your Symbole order shipment status. Enter your order number and email to get real-time updates."
+        url="/track-order"
+      />
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}

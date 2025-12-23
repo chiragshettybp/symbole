@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Loader2, ArrowRight, CreditCard, Truck } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
+import SEOHead from '@/components/seo/SEOHead';
 interface CheckoutFormData {
   firstName: string;
   phoneNumber: string;
@@ -173,7 +174,7 @@ const Checkout = () => {
         key: 'rzp_live_RpOxAXNArV8M8q',
         amount: totalAmount,
         currency: 'INR',
-        name: 'Ordify',
+        name: 'Symbole',
         description: 'Order Payment',
         handler: async function (response: any) {
           try {
@@ -282,6 +283,7 @@ const Checkout = () => {
       </Layout>;
   }
   return <Layout>
+      <SEOHead title="Checkout" description="Complete your order at Symbole. Secure checkout with multiple payment options." url="/checkout" />
       <div className="min-h-screen bg-background">
         <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8">
           <div className="max-w-md mx-auto">

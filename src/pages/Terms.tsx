@@ -1,7 +1,14 @@
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
+import SEOHead from "@/components/seo/SEOHead";
+
 const Terms = () => {
   return <Layout>
+      <SEOHead 
+        title="Terms & Conditions"
+        description="Read Symbole's terms and conditions for using our website and services."
+        url="/terms"
+      />
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">

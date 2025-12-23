@@ -1,9 +1,15 @@
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
+import SEOHead from "@/components/seo/SEOHead";
 
 const Privacy = () => {
   return (
     <Layout>
+      <SEOHead 
+        title="Privacy Policy"
+        description="Learn how Symbole collects, uses, and protects your personal information. Read our privacy policy."
+        url="/privacy"
+      />
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-12">
