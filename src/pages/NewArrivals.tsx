@@ -1,10 +1,16 @@
 import Layout from "@/components/layout/Layout";
 import ProductGrid from "@/components/products/ProductGrid";
 import { Badge } from "@/components/ui/badge";
+import SEOHead from "@/components/seo/SEOHead";
 
 const NewArrivals = () => {
   return (
     <Layout>
+      <SEOHead 
+        title="New Arrivals - Latest Fashion"
+        description="Shop the latest imported jackets, apparels, and trending styles. Fresh drops and exclusive designs at Symbole."
+        url="/new-arrivals"
+      />
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">

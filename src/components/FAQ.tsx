@@ -9,7 +9,7 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: "What types of products does Ordify offer?",
+    question: "What types of products does Symbole offer?",
     answer: "We specialize in premium imported jackets, apparels, and fashion accessories. Our collection includes bomber jackets, leather jackets, denim wear, hoodies, casual wear, and more - all sourced from top international brands and designers."
   },
   {
@@ -25,7 +25,7 @@ const faqData: FAQItem[] = [
     answer: "Our imported products are built to last with premium materials and expert craftsmanship. We carefully select each brand and item based on quality standards, ensuring durability and style that stands the test of time."
   },
   {
-    question: "Who shops at Ordify?",
+    question: "Who shops at Symbole?",
     answer: "Everyone! Whether you're a fashion enthusiast, outdoor adventurer, or someone who values quality and style, our diverse collection of imported jackets and apparels has something for every lifestyle and preference."
   },
   {

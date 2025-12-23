@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
+import SEOHead from '@/components/seo/SEOHead';
 
 const Cart = () => {
   const {
@@ -17,6 +18,7 @@ const Cart = () => {
   } = useCart();
   if (isLoading) {
     return <Layout>
+        <SEOHead title="Shopping Cart" description="View your shopping cart at Symbole." url="/cart" />
         <div className="container mx-auto px-4 py-8">
           <div className="animate-pulse">
             <div className="h-8 bg-muted rounded w-1/4 mb-8"></div>
@@ -29,9 +31,10 @@ const Cart = () => {
   }
   if (items.length === 0) {
     return <Layout>
+        <SEOHead title="Shopping Cart" description="View your shopping cart at Symbole." url="/cart" />
         <div className="container mx-auto px-4 py-16">
           <div className="text-center space-y-6">
-            <ShoppingBag className="h-24 w-24 mx-auto text-muted-foreground" />
+            <ShoppingBag className="h-24 w-24 mx-auto text-muted-foreground" aria-hidden="true" />
             <h1 className="text-3xl font-bold text-foreground">Your cart is empty</h1>
             <p className="text-muted-foreground max-w-md mx-auto">
               Looks like you haven't added any items to your cart yet. Start shopping to fill it up!
@@ -46,8 +49,8 @@ const Cart = () => {
       </Layout>;
   }
   return <Layout>
+      <SEOHead title="Shopping Cart" description="View and manage your shopping cart at Symbole." url="/cart" />
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
-        {/* Celebration Header */}
         
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
