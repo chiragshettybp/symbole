@@ -17,13 +17,13 @@ const HeroBanner = () => {
         <div className="container mx-auto px-4 pb-12 sm:pb-16 lg:pb-20">
           <div className="max-w-xl">
             <p className="text-white/80 text-sm sm:text-base font-medium mb-2 tracking-wider uppercase">
-              Premium Streetwear
+              Imported Premium Wear
             </p>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
-              Express Yourself with Statement Tees
+              Authentic Streetwear. Delivered to Your Door.
             </h1>
             <p className="text-white/80 text-base sm:text-lg mb-6 max-w-md">
-              Curated collection of bold, expressive t-shirts designed to make a statement.
+              Hand-picked international brands. Free shipping on all orders.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/new-arrivals">
